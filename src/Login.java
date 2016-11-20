@@ -12,22 +12,22 @@ public class Login extends JFrame {
 
     public Login() {
 
-        JLabel title = new JLabel();
-        JLabel logo = new JLabel();
-        JLabel pinLabel = new JLabel();
+        JLabel title = new JLabel(); //Login Screen Title
+        JLabel logo = new JLabel(); //Login Screen Logo
+        JLabel pinLabel = new JLabel(); //Pin Label
 
-        JButton login = new JButton();
+        JButton login = new JButton(); //Login Button
 
-        title.setText("Bob's Pizza");
+        title.setText("Bob's Pizza"); //Set's Title
         title.setFont(new Font("Courier", Font.PLAIN,65));
 
-        Icon icon = new ImageIcon("src/pizzaHeart.jpg");
-        logo.setIcon(icon);
+        Icon icon = new ImageIcon("src/pizzaHeart.jpg"); //New Icon
+        logo.setIcon(icon); //Set's Login Screen Logo
 
-        pinLabel.setText("Enter PIN: ");
+        pinLabel.setText("Enter PIN: "); 
         pinInput.setMaximumSize(pinInput.getPreferredSize());
 
-        login.setText("Login");
+        login.setText("Login"); //Set Login Button Text
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -36,7 +36,7 @@ public class Login extends JFrame {
 
 
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane()); //Set Layout
         getContentPane().setLayout(layout);
         getContentPane().setBackground(Color.white);
         layout.setAutoCreateGaps(true);
@@ -74,8 +74,8 @@ public class Login extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String pin = pinInput.getText();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { //Pin Login Method
+        String pin = pinInput.getText(); //Set's the pin from user input
 
         if(pin.length()!=4){
             JOptionPane.showMessageDialog(this, "PIN is not length 4", "Incorrect Input", JOptionPane.ERROR_MESSAGE);

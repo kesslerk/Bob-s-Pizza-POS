@@ -14,14 +14,14 @@ import javax.swing.JTextField;
 public class PricesScreen extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField pizzaSmall;
+	private JTextField pizzaMedium;
+	private JTextField pizzaLarge;
+	private JTextField toppingSmall;
+	private JTextField toppingMedium;
+	private JTextField toppingLarge;
+	private JTextField sodaPrice;
+	private JTextField tax;
 
 	/**
 	 * Launch the application.
@@ -60,89 +60,95 @@ public class PricesScreen extends JFrame {
 		btnOrderScreen.setBounds(577, 6, 117, 29);
 		contentPane.add(btnOrderScreen);
 		
-		JLabel lblPizza = new JLabel("Pizza Price");
-		lblPizza.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblPizza.setBounds(6, 65, 97, 16);
-		contentPane.add(lblPizza);
+		JLabel lblPizzaPrice = new JLabel("Pizza Price");
+		lblPizzaPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblPizzaPrice.setBounds(6, 65, 97, 16);
+		contentPane.add(lblPizzaPrice);
 		
-		JLabel lblSmall = new JLabel("Small");
-		lblSmall.setBounds(16, 93, 61, 16);
-		contentPane.add(lblSmall);
+		JLabel lblpizzaSmall = new JLabel("Small");
+		lblpizzaSmall.setBounds(16, 93, 61, 16);
+		contentPane.add(lblpizzaSmall);
 		
-		textField = new JTextField();
-		textField.setBounds(89, 93, 61, 16);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		pizzaSmall = new JTextField();
+		lblpizzaSmall.setLabelFor(pizzaSmall);
+		pizzaSmall.setBounds(89, 93, 61, 16);
+		contentPane.add(pizzaSmall);
+		pizzaSmall.setColumns(10);
 		
-		JLabel lblMedium = new JLabel("Medium");
-		lblMedium.setBounds(201, 93, 61, 16);
-		contentPane.add(lblMedium);
+		JLabel lblpizzaMedium = new JLabel("Medium");
+		lblpizzaMedium.setBounds(201, 93, 61, 16);
+		contentPane.add(lblpizzaMedium);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(274, 93, 61, 16);
-		contentPane.add(textField_1);
+		pizzaMedium = new JTextField();
+		lblpizzaMedium.setLabelFor(pizzaMedium);
+		pizzaMedium.setColumns(10);
+		pizzaMedium.setBounds(274, 93, 61, 16);
+		contentPane.add(pizzaMedium);
 		
-		JLabel lblLarge = new JLabel("Large");
-		lblLarge.setBounds(416, 93, 61, 16);
-		contentPane.add(lblLarge);
+		JLabel lblpizzaLarge = new JLabel("Large");
+		lblpizzaLarge.setBounds(416, 93, 61, 16);
+		contentPane.add(lblpizzaLarge);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(478, 93, 61, 16);
-		contentPane.add(textField_2);
+		pizzaLarge = new JTextField();
+		lblpizzaLarge.setLabelFor(pizzaLarge);
+		pizzaLarge.setColumns(10);
+		pizzaLarge.setBounds(478, 93, 61, 16);
+		contentPane.add(pizzaLarge);
 		
 		JLabel lblToppingPrice = new JLabel("Topping Price");
 		lblToppingPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblToppingPrice.setBounds(6, 168, 117, 19);
 		contentPane.add(lblToppingPrice);
 		
-		JLabel label = new JLabel("Small");
-		label.setBounds(16, 199, 61, 16);
-		contentPane.add(label);
+		JLabel lbltoppingSmall = new JLabel("Small");
+		lbltoppingSmall.setBounds(16, 199, 61, 16);
+		contentPane.add(lbltoppingSmall);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(89, 199, 61, 16);
-		contentPane.add(textField_3);
+		toppingSmall = new JTextField();
+		lbltoppingSmall.setLabelFor(toppingSmall);
+		toppingSmall.setColumns(10);
+		toppingSmall.setBounds(89, 199, 61, 16);
+		contentPane.add(toppingSmall);
 		
-		JLabel label_1 = new JLabel("Medium");
-		label_1.setBounds(201, 199, 61, 16);
-		contentPane.add(label_1);
+		JLabel lbltoppingMedium = new JLabel("Medium");
+		lbltoppingMedium.setBounds(201, 199, 61, 16);
+		contentPane.add(lbltoppingMedium);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(274, 199, 61, 16);
-		contentPane.add(textField_4);
+		toppingMedium = new JTextField();
+		lbltoppingMedium.setLabelFor(toppingMedium);
+		toppingMedium.setColumns(10);
+		toppingMedium.setBounds(274, 199, 61, 16);
+		contentPane.add(toppingMedium);
 		
-		JLabel label_2 = new JLabel("Large");
-		label_2.setBounds(416, 199, 61, 16);
-		contentPane.add(label_2);
+		JLabel lbltoppingLarge = new JLabel("Large");
+		lbltoppingLarge.setBounds(416, 199, 61, 16);
+		contentPane.add(lbltoppingLarge);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(478, 199, 61, 16);
-		contentPane.add(textField_5);
+		toppingLarge = new JTextField();
+		lbltoppingLarge.setLabelFor(toppingLarge);
+		toppingLarge.setColumns(10);
+		toppingLarge.setBounds(478, 199, 61, 16);
+		contentPane.add(toppingLarge);
 		
 		JLabel lblSodaPrice = new JLabel("Soda Price");
 		lblSodaPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblSodaPrice.setBounds(6, 273, 97, 16);
 		contentPane.add(lblSodaPrice);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(16, 301, 61, 16);
-		contentPane.add(textField_6);
+		sodaPrice = new JTextField();
+		sodaPrice.setColumns(10);
+		sodaPrice.setBounds(16, 301, 61, 16);
+		contentPane.add(sodaPrice);
 		
 		JLabel lblTax = new JLabel("Tax");
 		lblTax.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblTax.setBounds(6, 367, 61, 16);
 		contentPane.add(lblTax);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(16, 395, 61, 16);
-		contentPane.add(textField_7);
+		tax = new JTextField();
+		tax.setColumns(10);
+		tax.setBounds(16, 395, 61, 16);
+		contentPane.add(tax);
 		
 		JButton btnClear = new JButton("Clear");
 		btnClear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));

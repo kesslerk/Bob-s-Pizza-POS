@@ -13,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 
 public class OrderScreen extends JFrame {
@@ -221,8 +222,13 @@ public class OrderScreen extends JFrame {
 		
 		table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		table.setBounds(530, 47, 164, 299);
+		table.setBounds(530, 76, 164, 267);
 		contentPane.add(table);
+		
+		JLabel lblCart = new JLabel("Cart");
+		lblCart.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCart.setBounds(530, 58, 164, 16);
+		contentPane.add(lblCart);
 		
 	}
 }

@@ -27,8 +27,8 @@ public class OrderScreen extends JFrame {
 	private JTextField mushroom;
 	private JTextField greenpepper;
 	private JTextField bacon;
-	private JTextField textField;
-	private JTable table;
+	private JTextField soda;
+	private JTable cartTable;
 
 	/**
 	 * Launch the application.
@@ -86,96 +86,96 @@ public class OrderScreen extends JFrame {
 		contentPane.add(scrollPane);
 		
 		String[] ar = {"Small", "Medium", "Large"};
-		JList list = new JList(ar);
-		list.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		scrollPane.setViewportView(list);
+		JList sizeList = new JList(ar);
+		sizeList.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		scrollPane.setViewportView(sizeList);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(118, 103, 140, 224);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JPanel toppingsPanel = new JPanel();
+		toppingsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		toppingsPanel.setBackground(Color.WHITE);
+		toppingsPanel.setBounds(118, 103, 140, 224);
+		contentPane.add(toppingsPanel);
+		toppingsPanel.setLayout(null);
 		
 		JLabel lblCheese = new JLabel("Cheese");
 		lblCheese.setBounds(6, 6, 45, 16);
-		panel.add(lblCheese);
+		toppingsPanel.add(lblCheese);
 		
 		JLabel lblPepperoni = new JLabel("Pepperoni");
 		lblPepperoni.setBounds(6, 34, 83, 16);
-		panel.add(lblPepperoni);
+		toppingsPanel.add(lblPepperoni);
 		
 		JLabel lblNewLabel = new JLabel("Extra Cheese");
 		lblNewLabel.setBounds(6, 62, 83, 16);
-		panel.add(lblNewLabel);
+		toppingsPanel.add(lblNewLabel);
 		
 		JLabel lblSausage = new JLabel("Sausage");
 		lblSausage.setBounds(6, 90, 61, 16);
-		panel.add(lblSausage);
+		toppingsPanel.add(lblSausage);
 		
 		JLabel lblOnion = new JLabel("Onion");
 		lblOnion.setBounds(6, 118, 61, 16);
-		panel.add(lblOnion);
+		toppingsPanel.add(lblOnion);
 		
 		JLabel lblMushroom = new JLabel("Mushroom");
 		lblMushroom.setBounds(6, 146, 83, 16);
-		panel.add(lblMushroom);
+		toppingsPanel.add(lblMushroom);
 		
 		JLabel lblGreenPepper = new JLabel("Green Pepper");
 		lblGreenPepper.setBounds(6, 174, 83, 16);
-		panel.add(lblGreenPepper);
+		toppingsPanel.add(lblGreenPepper);
 		
 		JLabel lblBacon = new JLabel("Bacon");
 		lblBacon.setBounds(6, 202, 61, 16);
-		panel.add(lblBacon);
+		toppingsPanel.add(lblBacon);
 		
 		cheese = new JTextField();
 		lblCheese.setLabelFor(cheese);
 		cheese.setBounds(89, 6, 45, 16);
-		panel.add(cheese);
+		toppingsPanel.add(cheese);
 		cheese.setColumns(10);
 		
 		pepperoni = new JTextField();
 		lblPepperoni.setLabelFor(pepperoni);
 		pepperoni.setBounds(89, 34, 45, 16);
-		panel.add(pepperoni);
+		toppingsPanel.add(pepperoni);
 		pepperoni.setColumns(10);
 		
 		xcheese = new JTextField();
 		lblNewLabel.setLabelFor(xcheese);
 		xcheese.setColumns(10);
 		xcheese.setBounds(89, 62, 45, 16);
-		panel.add(xcheese);
+		toppingsPanel.add(xcheese);
 		
 		sausage = new JTextField();
 		lblSausage.setLabelFor(sausage);
 		sausage.setColumns(10);
 		sausage.setBounds(89, 90, 45, 16);
-		panel.add(sausage);
+		toppingsPanel.add(sausage);
 		
 		onion = new JTextField();
 		lblOnion.setLabelFor(onion);
 		onion.setColumns(10);
 		onion.setBounds(89, 118, 45, 16);
-		panel.add(onion);
+		toppingsPanel.add(onion);
 		
 		mushroom = new JTextField();
 		lblMushroom.setLabelFor(mushroom);
 		mushroom.setColumns(10);
 		mushroom.setBounds(89, 146, 45, 16);
-		panel.add(mushroom);
+		toppingsPanel.add(mushroom);
 		
 		greenpepper = new JTextField();
 		lblGreenPepper.setLabelFor(greenpepper);
 		greenpepper.setColumns(10);
 		greenpepper.setBounds(89, 174, 45, 16);
-		panel.add(greenpepper);
+		toppingsPanel.add(greenpepper);
 		
 		bacon = new JTextField();
 		lblBacon.setLabelFor(bacon);
 		bacon.setColumns(10);
 		bacon.setBounds(89, 202, 45, 16);
-		panel.add(bacon);
+		toppingsPanel.add(bacon);
 		
 		JButton btnAddPizzasTo = new JButton("Add Pizzas to Cart");
 		btnAddPizzasTo.setBounds(54, 360, 140, 29);
@@ -186,21 +186,22 @@ public class OrderScreen extends JFrame {
 		lblSoda.setBounds(327, 47, 61, 16);
 		contentPane.add(lblSoda);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(327, 103, 117, 29);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel sodaPanel = new JPanel();
+		sodaPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		sodaPanel.setBackground(Color.WHITE);
+		sodaPanel.setBounds(327, 103, 117, 29);
+		contentPane.add(sodaPanel);
+		sodaPanel.setLayout(null);
 		
 		JLabel lblGeneric = new JLabel("Generic");
 		lblGeneric.setBounds(6, 6, 47, 16);
-		panel_1.add(lblGeneric);
+		sodaPanel.add(lblGeneric);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(66, 6, 45, 16);
-		panel_1.add(textField);
+		soda = new JTextField();
+		lblGeneric.setLabelFor(soda);
+		soda.setColumns(10);
+		soda.setBounds(66, 6, 45, 16);
+		sodaPanel.add(soda);
 		
 		JButton btnAddSodasTo = new JButton("Add Sodas to Cart");
 		btnAddSodasTo.setBounds(316, 144, 140, 29);
@@ -220,12 +221,13 @@ public class OrderScreen extends JFrame {
 		btnClearOrder.setBounds(503, 370, 129, 44);
 		contentPane.add(btnClearOrder);
 		
-		table = new JTable();
-		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		table.setBounds(530, 76, 164, 267);
-		contentPane.add(table);
+		cartTable = new JTable();
+		cartTable.setBorder(new LineBorder(new Color(0, 0, 0)));
+		cartTable.setBounds(530, 76, 164, 267);
+		contentPane.add(cartTable);
 		
 		JLabel lblCart = new JLabel("Cart");
+		lblCart.setLabelFor(cartTable);
 		lblCart.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCart.setBounds(530, 58, 164, 16);
 		contentPane.add(lblCart);

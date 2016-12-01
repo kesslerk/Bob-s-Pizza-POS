@@ -21,7 +21,7 @@ import javax.swing.JButton;
 public class LoginScreen extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField pin;
 
 	/**
 	 * Launch the application.
@@ -60,20 +60,22 @@ public class LoginScreen extends JFrame {
 		JLabel logo = new JLabel();
 		Image img = new ImageIcon(this.getClass().getResource("/pizzaHeart.jpg")).getImage();
 		logo.setIcon(new ImageIcon(img)); //Set's Login Screen Logo
-		logo.setBounds(101, 58, 422, 352);
+		logo.setBounds(204, 56, 279, 276);
 		contentPane.add(logo);
 		
 		JLabel lblEnterPin = new JLabel("Enter PIN");
-		lblEnterPin.setBounds(279, 412, 61, 16);
+		lblEnterPin.setBounds(274, 326, 61, 16);
 		contentPane.add(lblEnterPin);
 		
-		textField = new JTextField();
-		textField.setBounds(365, 412, 97, 16);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		pin = new JTextField();
+		lblEnterPin.setLabelFor(pin);
+		pin.setBounds(347, 326, 97, 16);
+		contentPane.add(pin);
+		pin.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(302, 440, 117, 29);
+		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnLogin.setBounds(288, 380, 117, 29);
 		contentPane.add(btnLogin);
 	}
 }

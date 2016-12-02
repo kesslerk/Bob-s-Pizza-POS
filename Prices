@@ -1,7 +1,8 @@
-smallCheese,7.99
-smallTopping,8.99
-mediumCheese,8.99
-mediumTopping,9.99
-largeCheese,9.99
-largeTopping,10.99
-soda,2.50
+pizzaSmall,7.99
+toppingSmall,8.99
+pizzaMedium,8.99
+toppingMedium,9.99
+pizzaLarge,9.99
+toppingLarge,10.99
+sodaPrice,2.50
+tax,0.06

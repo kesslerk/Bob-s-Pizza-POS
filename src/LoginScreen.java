@@ -84,12 +84,10 @@ public class LoginScreen extends JFrame {
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Hello");
-				/* String pinInput = pin.getText(); //Set's the pin from user input
-
+				String pinInput = pin.getText(); //Set's the pin from user input
 			        if(pinInput.length()!=4){
 			            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Incorrect Input", JOptionPane.ERROR_MESSAGE);
-			        }else if("".equals(pin)){
+			        }else if("".equals(pinInput)){
 			            JOptionPane.showMessageDialog(null, "PIN is empty", "Incorrect Input", JOptionPane.ERROR_MESSAGE);
 			        }else{
 		
@@ -101,18 +99,16 @@ public class LoginScreen extends JFrame {
 			                boolean flag = false;
 			                while(line!=null){
 			                    String[] user = line.split(",");
-			                    if(pin.equals(user[0])){
+			                    if(pinInput.equals(user[0])){
 			                        flag = true;
 			                    }
 			                    line=br.readLine();
 			                }
-
 			                if(!flag){
 			                    JOptionPane.showMessageDialog(null, "Incorrect PIN", "Incorrect PIN", JOptionPane.ERROR_MESSAGE);
 			                }else{
 			                    JOptionPane.showMessageDialog(null, "Hello "+pin, "Correct Input", JOptionPane.PLAIN_MESSAGE);
 			                }
-
 							} catch (FileNotFoundException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -120,7 +116,7 @@ public class LoginScreen extends JFrame {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-			        }*/
+			        }
 			}
 		});
 		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 16));

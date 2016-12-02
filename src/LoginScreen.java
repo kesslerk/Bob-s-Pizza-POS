@@ -1,9 +1,8 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
 
-import javax.swing.Icon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -17,6 +16,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 public class LoginScreen extends JFrame {
 
@@ -28,6 +34,7 @@ public class LoginScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					LoginScreen frame = new LoginScreen();
@@ -74,6 +81,48 @@ public class LoginScreen extends JFrame {
 		pin.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Hello");
+				/* String pinInput = pin.getText(); //Set's the pin from user input
+
+			        if(pinInput.length()!=4){
+			            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Incorrect Input", JOptionPane.ERROR_MESSAGE);
+			        }else if("".equals(pin)){
+			            JOptionPane.showMessageDialog(null, "PIN is empty", "Incorrect Input", JOptionPane.ERROR_MESSAGE);
+			        }else{
+		
+			                BufferedReader br;
+							try {
+								br = new BufferedReader(new FileReader("Users"));
+							
+			                String line = br.readLine();
+			                boolean flag = false;
+			                while(line!=null){
+			                    String[] user = line.split(",");
+			                    if(pin.equals(user[0])){
+			                        flag = true;
+			                    }
+			                    line=br.readLine();
+			                }
+
+			                if(!flag){
+			                    JOptionPane.showMessageDialog(null, "Incorrect PIN", "Incorrect PIN", JOptionPane.ERROR_MESSAGE);
+			                }else{
+			                    JOptionPane.showMessageDialog(null, "Hello "+pin, "Correct Input", JOptionPane.PLAIN_MESSAGE);
+			                }
+
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+			        }*/
+			}
+		});
 		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnLogin.setBounds(288, 380, 117, 29);
 		contentPane.add(btnLogin);

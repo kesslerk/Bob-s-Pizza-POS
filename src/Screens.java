@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -30,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Screens extends JFrame {
@@ -159,16 +161,20 @@ public class Screens extends JFrame {
 	 
 	 public void Order(){
 		 	JPanel order;
-			JTextField cheese;
-			JTextField pepperoni;
-			JTextField xcheese;
-			JTextField sausage;
-			JTextField onion;
-			JTextField mushroom;
-			JTextField greenpepper;
-			JTextField bacon;
+			JTextField Cheese;
+			JTextField Pepperoni;
+			JTextField Extracheese;
+			JTextField Sausage;
+			JTextField Onion;
+			JTextField Mushroom;
+			JTextField GreenPepper;
+			JTextField Bacon;
 			JTextField soda;
-			JTable cartTable;
+			JTable cartTable = new JTable(new DefaultTableModel(new Object[]{"Item", "Edit", "Delete"},0));
+			cartTable.setCellSelectionEnabled(true);
+			cartTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+			cartTable.getColumnModel().getColumn(1).setPreferredWidth(15);
+			cartTable.getColumnModel().getColumn(2).setPreferredWidth(15);
 		
 			order = new JPanel();
 			panel.add(order, "order");
@@ -256,67 +262,111 @@ public class Screens extends JFrame {
 			lblBacon.setBounds(6, 202, 61, 16);
 			toppingsPanel.add(lblBacon);
 			
-			cheese = new JTextField();
-			lblCheese.setLabelFor(cheese);
-			cheese.setBounds(89, 6, 45, 16);
-			toppingsPanel.add(cheese);
-			cheese.setColumns(10);
+			Cheese = new JTextField();
+			Cheese.setName("Cheese");
+			lblCheese.setLabelFor(Cheese);
+			Cheese.setBounds(89, 6, 45, 16);
+			toppingsPanel.add(Cheese);
+			Cheese.setColumns(10);
 			
-			pepperoni = new JTextField();
-			lblPepperoni.setLabelFor(pepperoni);
-			pepperoni.setBounds(89, 34, 45, 16);
-			toppingsPanel.add(pepperoni);
-			pepperoni.setColumns(10);
+			Pepperoni = new JTextField();
+			Pepperoni.setName("Pepperoni");
+			lblPepperoni.setLabelFor(Pepperoni);
+			Pepperoni.setBounds(89, 34, 45, 16);
+			toppingsPanel.add(Pepperoni);
+			Pepperoni.setColumns(10);
 			
-			xcheese = new JTextField();
-			lblNewLabel.setLabelFor(xcheese);
-			xcheese.setColumns(10);
-			xcheese.setBounds(89, 62, 45, 16);
-			toppingsPanel.add(xcheese);
+			Extracheese = new JTextField();
+			Extracheese.setName("Extra Cheese");
+			lblNewLabel.setLabelFor(Extracheese);
+			Extracheese.setColumns(10);
+			Extracheese.setBounds(89, 62, 45, 16);
+			toppingsPanel.add(Extracheese);
 			
-			sausage = new JTextField();
-			lblSausage.setLabelFor(sausage);
-			sausage.setColumns(10);
-			sausage.setBounds(89, 90, 45, 16);
-			toppingsPanel.add(sausage);
+			Sausage = new JTextField();
+			Sausage.setName("Sausage");
+			lblSausage.setLabelFor(Sausage);
+			Sausage.setColumns(10);
+			Sausage.setBounds(89, 90, 45, 16);
+			toppingsPanel.add(Sausage);
 			
-			onion = new JTextField();
-			lblOnion.setLabelFor(onion);
-			onion.setColumns(10);
-			onion.setBounds(89, 118, 45, 16);
-			toppingsPanel.add(onion);
+			Onion = new JTextField();
+			Onion.setName("Onion");
+			lblOnion.setLabelFor(Onion);
+			Onion.setColumns(10);
+			Onion.setBounds(89, 118, 45, 16);
+			toppingsPanel.add(Onion);
 			
-			mushroom = new JTextField();
-			lblMushroom.setLabelFor(mushroom);
-			mushroom.setColumns(10);
-			mushroom.setBounds(89, 146, 45, 16);
-			toppingsPanel.add(mushroom);
+			Mushroom = new JTextField();
+			Mushroom.setName("Mushroom");
+			lblMushroom.setLabelFor(Mushroom);
+			Mushroom.setColumns(10);
+			Mushroom.setBounds(89, 146, 45, 16);
+			toppingsPanel.add(Mushroom);
 			
-			greenpepper = new JTextField();
-			lblGreenPepper.setLabelFor(greenpepper);
-			greenpepper.setColumns(10);
-			greenpepper.setBounds(89, 174, 45, 16);
-			toppingsPanel.add(greenpepper);
+			GreenPepper = new JTextField();
+			GreenPepper.setName("GreenPepper");
+			lblGreenPepper.setLabelFor(GreenPepper);
+			GreenPepper.setColumns(10);
+			GreenPepper.setBounds(89, 174, 45, 16);
+			toppingsPanel.add(GreenPepper);
 			
-			bacon = new JTextField();
-			lblBacon.setLabelFor(bacon);
-			bacon.setColumns(10);
-			bacon.setBounds(89, 202, 45, 16);
-			toppingsPanel.add(bacon);
+			Bacon = new JTextField();
+			Bacon.setName("Bacon");
+			lblBacon.setLabelFor(Bacon);
+			Bacon.setColumns(10);
+			Bacon.setBounds(89, 202, 45, 16);
+			toppingsPanel.add(Bacon);
 			
 			JButton btnAddPizzasTo = new JButton("Add Pizzas to Cart");
+			btnAddPizzasTo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
+					
+					if(sizeList.isSelectionEmpty()){
+						JOptionPane.showMessageDialog(null, "Please Select a Pizza Size", "Incorrect Input", JOptionPane.ERROR_MESSAGE);
+					}else{
+						String size = sizeList.getSelectedValue().toString();
+						boolean flag = false;
+						String item;
+						JTextField[] toppings = {Cheese, Pepperoni, Extracheese, Sausage, Onion, Mushroom, GreenPepper, Bacon};
+						
+						for(int i=0; i<toppings.length; i++){
+							if(!toppings[i].getText().equals("")){
+								flag=true;
+								int amount = Integer.parseInt(toppings[i].getText());
+								if(amount<=0 || amount>=100){
+									JOptionPane.showMessageDialog(null, "Number of pizzas ust be between 0 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+								}else{
+									item = toppings[i].getText() + " " + size + " " + toppings[i].getName();
+									model.addRow(new Object[]{item, "edit", "delete"});
+								}
+							}
+						}
+						if(!flag){
+							JOptionPane.showMessageDialog(null, "Please Select Quantity","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+						}
+						
+						for(int i=0; i<toppings.length; i++){
+							toppings[i].setText("");
+						}
+						
+						sizeList.clearSelection();	
+					}
+				}
+			});
 			btnAddPizzasTo.setBounds(54, 360, 140, 29);
 			order.add(btnAddPizzasTo);
 			
 			JLabel lblSoda = new JLabel("Soda");
 			lblSoda.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-			lblSoda.setBounds(327, 47, 61, 16);
+			lblSoda.setBounds(295, 47, 61, 16);
 			order.add(lblSoda);
 			
 			JPanel sodaPanel = new JPanel();
 			sodaPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 			sodaPanel.setBackground(Color.WHITE);
-			sodaPanel.setBounds(327, 103, 117, 29);
+			sodaPanel.setBounds(284, 103, 117, 29);
 			order.add(sodaPanel);
 			sodaPanel.setLayout(null);
 			
@@ -331,11 +381,29 @@ public class Screens extends JFrame {
 			sodaPanel.add(soda);
 			
 			JButton btnAddSodasTo = new JButton("Add Sodas to Cart");
-			btnAddSodasTo.setBounds(316, 144, 140, 29);
+			btnAddSodasTo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
+					if(!soda.getText().equals("")){
+						int amount = Integer.parseInt(soda.getText());
+						if(amount<=0 || amount>=100){
+							JOptionPane.showMessageDialog(null, "Number of sodas ust be between 0 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+						}else{
+							String item = soda.getText() + " Sodas";
+							model.addRow(new Object[]{item, "edit", "delete"});
+							soda.setText("");
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Please Enter Quantity","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+			});
+			btnAddSodasTo.setBounds(270, 144, 140, 29);
 			order.add(btnAddSodasTo);
 			
 			JLabel lblEnterSodaQuantity = new JLabel("Enter Soda Quantity");
-			lblEnterSodaQuantity.setBounds(316, 75, 129, 16);
+			lblEnterSodaQuantity.setBounds(284, 75, 129, 16);
 			order.add(lblEnterSodaQuantity);
 			
 			JButton btnSubmitOrder = new JButton("Submit Order");
@@ -344,19 +412,33 @@ public class Screens extends JFrame {
 			order.add(btnSubmitOrder);
 			
 			JButton btnClearOrder = new JButton("Clear Order");
+			btnClearOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
+					model.setRowCount(0);
+					
+					/*int size = model.getRowCount();
+					System.out.println(size);
+					for(int i=0; i<size; i++){
+						System.out.println(size);
+						System.out.println(i);
+						model.removeRow(i);
+					}*/
+				}
+			});
 			btnClearOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			btnClearOrder.setBounds(503, 370, 129, 44);
 			order.add(btnClearOrder);
 			
-			cartTable = new JTable();
+			//cartTable = new JTable();
 			cartTable.setBorder(new LineBorder(new Color(0, 0, 0)));
-			cartTable.setBounds(530, 76, 164, 267);
+			cartTable.setBounds(422, 76, 272, 267);
 			order.add(cartTable);
 			
 			JLabel lblCart = new JLabel("Cart");
 			lblCart.setLabelFor(cartTable);
 			lblCart.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCart.setBounds(530, 58, 164, 16);
+			lblCart.setBounds(357, 60, 164, 16);
 			order.add(lblCart);
 	 }
 	 

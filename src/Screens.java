@@ -336,7 +336,7 @@ public class Screens extends JFrame {
 								flag=true;
 								int amount = Integer.parseInt(toppings[i].getText());
 								if(amount<=0 || amount>=100){
-									JOptionPane.showMessageDialog(null, "Number of pizzas ust be between 0 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null, "Number of pizzas must be between 0 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
 								}else{
 									item = toppings[i].getText() + " " + size + " " + toppings[i].getName();
 									model.addRow(new Object[]{item, "edit", "delete"});

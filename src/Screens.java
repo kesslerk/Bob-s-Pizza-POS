@@ -643,45 +643,45 @@ public class Screens extends JFrame {
 			lblDeleteAUser.setBounds(6, 260, 117, 16);
 			users.add(lblDeleteAUser);
 			
-			JLabel lbldeleteName = new JLabel("Name");
-			lbldeleteName.setBounds(16, 288, 61, 16);
-			users.add(lbldeleteName);
-			
 			JLabel lbldeletePin = new JLabel("PIN");
-			lbldeletePin.setBounds(260, 288, 61, 16);
+			lbldeletePin.setBounds(16, 288, 61, 16);
 			users.add(lbldeletePin);
 			
 			deletePin = new JTextField();
 			lbldeletePin.setLabelFor(deletePin);
 			deletePin.setColumns(10);
-			deletePin.setBounds(300, 288, 134, 16);
+			deletePin.setBounds(76, 288, 134, 16);
 			users.add(deletePin);
 			
 			JButton btnApplydel = new JButton("Apply Delete");
 			btnApplydel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String pin1 = addPin.getText();
-					String name1 = addName.getText();
 					
+					String pin1 = deletePin.getText();
 					BufferedReader br;
 					
+					if(pin1.length()!=4){
+			            JOptionPane.showMessageDialog(null, "Enter correct length PIN", "PIN is not length 4", JOptionPane.ERROR_MESSAGE);
+			        }else if("".equals(pin1)){
+			            JOptionPane.showMessageDialog(null, "PIN is empty", "Enter PIN", JOptionPane.ERROR_MESSAGE);
+			        }else {
+	
 					try{
 						
 						File users = new File("Users");
 						File tempFile = new File(users.getAbsolutePath() + ".tmp");
 						br = new BufferedReader(new FileReader("Users"));
 						PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-
 						String line = null;
+						int counter = 0;
+			
+					/*if(br.readLine() == null){
+						JOptionPane.showMessageDialog(null, "There is only one user", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
+						
+					}*/
 					
 					while((line = br.readLine()) !=null){
-						 
-						System.out.println(line);
-						System.out.println(pin1 + "!!!!!!");
-						
-						String[] user = line.split(",");
-		                   //if(!pin1.equals(user[0])){
-		                    	 //System.out.println(user[0]);
+						counter++;
 	                      if( !line.trim().startsWith(pin1)){
 	                    	  
 	                    	  pw.println(line);
@@ -698,18 +698,24 @@ public class Screens extends JFrame {
 						System.out.println("could not delete file");
 						return;
 					}
-					
+					if(counter != 1){
 					if(!tempFile.renameTo(users)){
 						System.out.println("Could not rename file");
 					}
-					
+	                }else{
+	                	JOptionPane.showMessageDialog(null, "There is only one user", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
+	                }
+	                
+			
 					}catch(FileNotFoundException e2) {
 		                System.out.println("File not found.");
 					}catch(IOException k){
 		                System.out.println("IO Exception.");            
 					}
+					deletePin.setText("");
 				}
-			
+				}
+				
 				
 			});
 			btnApplydel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -742,7 +748,7 @@ public class Screens extends JFrame {
 		                
 					FileWriter writer = new FileWriter("Users", true);
 					BufferedWriter bufferedWriter = new BufferedWriter(writer);
-					bufferedWriter.newLine();
+					
 					
 					
 					
@@ -754,6 +760,7 @@ public class Screens extends JFrame {
 	                    line=br.readLine();
 	                }
 	                if(!flag){
+	                	bufferedWriter.newLine();
 	                	bufferedWriter.write(addPin.getText() +"," + addName.getText());
 	                	JOptionPane.showMessageDialog(null, "User Added", "User Added", JOptionPane.PLAIN_MESSAGE);
 	                }else{
@@ -769,6 +776,8 @@ public class Screens extends JFrame {
 		                System.out.println("IO Exception.");            
 		            }
 				}
+					addName.setText("");
+					addPin.setText("");
 				}	
 				
 			});

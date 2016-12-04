@@ -1,4 +1,3 @@
-
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -35,20 +34,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 
 public class Screens extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
+	private JTextField pin;
 	private CardLayout card;
-	private String pinString;
-	private String nameString;
-	
 
 	/**
 	 * Launch the application.
@@ -102,8 +96,6 @@ public class Screens extends JFrame {
 			login.setBorder(new EmptyBorder(5, 5, 5, 5));
 			login.setLayout(null);
 			
-			JTextField pin;
-			
 			JLabel lblBobsPizza = new JLabel("Bob's Pizza");
 			lblBobsPizza.setFont(new Font("Lucida Grande", Font.BOLD, 38));
 			lblBobsPizza.setBounds(237, 6, 243, 53);
@@ -145,8 +137,7 @@ public class Screens extends JFrame {
 				                while(line!=null){
 				                    String[] user = line.split(",");
 				                    if(pinInput.equals(user[0])){
-				                    	nameString = user[1];
-				                    	flag = true;
+				                        flag = true;
 				                    }
 				                    line=br.readLine();
 				                }
@@ -154,9 +145,6 @@ public class Screens extends JFrame {
 				                    JOptionPane.showMessageDialog(null, "Incorrect PIN", "Incorrect PIN", JOptionPane.ERROR_MESSAGE);
 				                }else{
 				                	card.show(panel, "order");
-				                	pinString=pin.getText();
-				                	
-				                	
 				                	pin.setText("");
 				                }
 								} catch (FileNotFoundException e1) {
@@ -186,18 +174,8 @@ public class Screens extends JFrame {
 			JTextField Bacon;
 			JTextField soda;
 			JTable receiptTable;
-			
-			JLabel name = new JLabel("");
-			name.setBounds(321, 11, 61, 16);
-			
+		
 			order = new JPanel();
-			order.addComponentListener(new ComponentAdapter() {
-				@Override
-				public void componentShown(ComponentEvent e) {
-					order.add(name);
-					name.setText(nameString);
-				}
-			});
 			panel.add(order, "order");
 			order.setBackground(Color.WHITE);
 			order.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -452,11 +430,22 @@ public class Screens extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
 					model.setRowCount(0);
+					
+					/*int size = model.getRowCount();
+					System.out.println(size);
+					for(int i=0; i<size; i++){
+						System.out.println(size);
+						System.out.println(i);
+						model.removeRow(i);
+					}*/
 				}
 			});
 			btnClearOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			btnClearOrder.setBounds(503, 370, 129, 44);
 			order.add(btnClearOrder);
+			
+			
+			
 			
 			JPanel receipt = new JPanel();
 			receipt.setBackground(Color.WHITE);
@@ -469,10 +458,10 @@ public class Screens extends JFrame {
 			receipt.add(label);
 			
 			JScrollPane receiptScroll = new JScrollPane();
-			receiptScroll.setBounds(128, 95, 462, 320);
+			receiptScroll.setBounds(128, 95, 462, 368);
 			receipt.add(receiptScroll);
 			
-			receiptTable = new JTable(new DefaultTableModel(new Object[]{"#", "Item", "Price"},0){
+			receiptTable = new JTable(new DefaultTableModel(new Object[]{"Quantity", "Item", "Price"},0){
 				public boolean isCellEditable(int rowIndex, int mColIndex) {
 			        return false;
 			    }
@@ -480,9 +469,7 @@ public class Screens extends JFrame {
 			receiptScroll.setViewportView(receiptTable);
 			receiptScroll.setBorder(BorderFactory.createEmptyBorder());
 			
-			receiptTable.getColumnModel().getColumn(0).setPreferredWidth(15);
-			receiptTable.getColumnModel().getColumn(1).setPreferredWidth(130);
-			receiptTable.getColumnModel().getColumn(2).setPreferredWidth(15);
+			receiptTable.getColumnModel().getColumn(1).setPreferredWidth(150);
 			
 			receiptTable.setFocusable(false);
 			receiptTable.setRowSelectionAllowed(false);
@@ -504,17 +491,8 @@ public class Screens extends JFrame {
 			});
 			button_1.setBounds(571, 6, 117, 29);
 			receipt.add(button_1);
-			
-			JLabel lblTotal = new JLabel("Total:");
-			lblTotal.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			lblTotal.setBounds(310, 438, 61, 16);
-			receipt.add(lblTotal);
-			
-			JLabel total = new JLabel("");
-			total.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			total.setBounds(383, 438, 84, 16);
-			receipt.add(total);
 			DefaultTableModel receiptModel = (DefaultTableModel) receiptTable.getModel();
+			receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "99.99"});
 			
 			JButton btnSubmitOrder = new JButton("Submit Order");
 			btnSubmitOrder.addActionListener(new ActionListener() {
@@ -522,41 +500,21 @@ public class Screens extends JFrame {
 					DefaultTableModel receiptModel =(DefaultTableModel) receiptTable.getModel();
 					card.show(panel, "reciept");
 					receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "99.99"});
-					receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "5.56"});
-					
-					float tot = 0;
-					for(int i=0; i<receiptModel.getRowCount(); i++){
-						tot += Float.parseFloat(receiptModel.getValueAt(i, 2).toString());
-					}
-					DecimalFormat df = new DecimalFormat();
-					df.setMaximumFractionDigits(2);
-					total.setText(String.valueOf(df.format(tot)));
 				}
 			});
 			btnSubmitOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			btnSubmitOrder.setBounds(339, 370, 129, 44);
 			order.add(btnSubmitOrder);
 			
+			
 	 }
 	
 	 public void Settings(){
-		 JLabel name = new JLabel("");
-			name.setBounds(321, 11, 61, 16);
-		 
 		 JPanel settings = new JPanel();
-		 settings.addComponentListener(new ComponentAdapter() {
-				@Override
-				public void componentShown(ComponentEvent e) {
-					settings.add(name);
-					name.setText(nameString);
-				}
-			});
 		 panel.add(settings, "settings");
 		 settings.setBackground(Color.WHITE);
 		 settings.setBorder(new EmptyBorder(5, 5, 5, 5));
 		 settings.setLayout(null);
-		 
-		 
 			
 		JButton btnSignOut = new JButton("Sign Out");
 		btnSignOut.addActionListener(new ActionListener() {
@@ -595,8 +553,8 @@ public class Screens extends JFrame {
 		btnUserAccouts.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnUserAccouts.setBounds(255, 235, 167, 67);
 		settings.add(btnUserAccouts);
-		
 	 }
+	 
 	public void Users(){
 		 
 		JTextField addName;
@@ -985,6 +943,9 @@ JButton btnApplyChanges = new JButton("Apply Changes");
 								if(price<=0){
 									JOptionPane.showMessageDialog(null, "Please enter a positive amount","Incorrect Input", JOptionPane.ERROR_MESSAGE);
 								}
+							}
+							for(int j=0; j<priceChange[i].getText().length(); j++){
+								
 							}
 						}
 						

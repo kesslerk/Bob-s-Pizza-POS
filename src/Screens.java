@@ -170,17 +170,32 @@ public class Screens extends JFrame {
 			JTextField GreenPepper;
 			JTextField Bacon;
 			JTextField soda;
-			JTable cartTable = new JTable(new DefaultTableModel(new Object[]{"Item", "Edit", "Delete"},0));
-			cartTable.setCellSelectionEnabled(true);
-			cartTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-			cartTable.getColumnModel().getColumn(1).setPreferredWidth(15);
-			cartTable.getColumnModel().getColumn(2).setPreferredWidth(15);
 		
 			order = new JPanel();
 			panel.add(order, "order");
 			order.setBackground(Color.WHITE);
 			order.setBorder(new EmptyBorder(5, 5, 5, 5));
 			order.setLayout(null);
+			
+			JLabel lblCart = new JLabel("Cart");
+			lblCart.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCart.setBounds(357, 60, 164, 16);
+			order.add(lblCart);
+			
+			JScrollPane scrollPanel = new JScrollPane();
+			scrollPanel.setBounds(419, 75, 275, 268);
+			order.add(scrollPanel);
+			JTable cartTable = new JTable(new DefaultTableModel(new Object[]{"#", "Item", "Edit", "Delete"},0));
+			scrollPanel.setViewportView(cartTable);
+			cartTable.setCellSelectionEnabled(true);
+			cartTable.getColumnModel().getColumn(0).setPreferredWidth(15);
+			cartTable.getColumnModel().getColumn(1).setPreferredWidth(130);
+			cartTable.getColumnModel().getColumn(2).setPreferredWidth(15);
+			cartTable.getColumnModel().getColumn(3).setPreferredWidth(15);
+			
+			//cartTable = new JTable();
+			cartTable.setBorder(null);
+			lblCart.setLabelFor(cartTable);
 			
 			JButton btnSignOut = new JButton("Sign Out");
 			btnSignOut.addActionListener(new ActionListener() {
@@ -335,11 +350,11 @@ public class Screens extends JFrame {
 							if(!toppings[i].getText().equals("")){
 								flag=true;
 								int amount = Integer.parseInt(toppings[i].getText());
-								if(amount<=0 || amount>=100){
-									JOptionPane.showMessageDialog(null, "Number of pizzas must be between 0 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+								if(amount<=0 || amount>100){
+									JOptionPane.showMessageDialog(null, "Number of pizzas must be between 1 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
 								}else{
-									item = toppings[i].getText() + " " + size + " " + toppings[i].getName();
-									model.addRow(new Object[]{item, "edit", "delete"});
+									item = size + " " + toppings[i].getName();
+									model.addRow(new Object[]{toppings[i].getText(), item, "edit", "delete"});
 								}
 							}
 						}
@@ -386,11 +401,11 @@ public class Screens extends JFrame {
 					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
 					if(!soda.getText().equals("")){
 						int amount = Integer.parseInt(soda.getText());
-						if(amount<=0 || amount>=100){
-							JOptionPane.showMessageDialog(null, "Number of sodas ust be between 0 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+						if(amount<=0 || amount>100){
+							JOptionPane.showMessageDialog(null, "Number of sodas ust be between 1 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
 						}else{
-							String item = soda.getText() + " Sodas";
-							model.addRow(new Object[]{item, "edit", "delete"});
+							String item =  "Sodas";
+							model.addRow(new Object[]{soda.getText(), item, "edit", "delete"});
 							soda.setText("");
 						}
 					}else{
@@ -405,11 +420,6 @@ public class Screens extends JFrame {
 			JLabel lblEnterSodaQuantity = new JLabel("Enter Soda Quantity");
 			lblEnterSodaQuantity.setBounds(284, 75, 129, 16);
 			order.add(lblEnterSodaQuantity);
-			
-			JButton btnSubmitOrder = new JButton("Submit Order");
-			btnSubmitOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			btnSubmitOrder.setBounds(339, 370, 129, 44);
-			order.add(btnSubmitOrder);
 			
 			JButton btnClearOrder = new JButton("Clear Order");
 			btnClearOrder.addActionListener(new ActionListener() {
@@ -430,16 +440,69 @@ public class Screens extends JFrame {
 			btnClearOrder.setBounds(503, 370, 129, 44);
 			order.add(btnClearOrder);
 			
-			//cartTable = new JTable();
-			cartTable.setBorder(new LineBorder(new Color(0, 0, 0)));
-			cartTable.setBounds(422, 76, 272, 267);
-			order.add(cartTable);
 			
-			JLabel lblCart = new JLabel("Cart");
-			lblCart.setLabelFor(cartTable);
-			lblCart.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCart.setBounds(357, 60, 164, 16);
-			order.add(lblCart);
+			
+			
+			JPanel receipt = new JPanel();
+			receipt.setBackground(Color.WHITE);
+			panel.add(receipt, "reciept");
+			receipt.setLayout(null);
+			
+			JLabel label = new JLabel("Bob's Pizza");
+			label.setFont(new Font("Lucida Grande", Font.BOLD, 38));
+			label.setBounds(241, 30, 243, 53);
+			receipt.add(label);
+			
+			JScrollPane receiptScroll = new JScrollPane();
+			receiptScroll.setBounds(128, 95, 462, 368);
+			receipt.add(receiptScroll);
+			
+			receiptTable = new JTable(new DefaultTableModel(new Object[]{"Quantity", "Item", "Price"},0){
+				public boolean isCellEditable(int rowIndex, int mColIndex) {
+			        return false;
+			    }
+			});
+			receiptScroll.setViewportView(receiptTable);
+			receiptScroll.setBorder(BorderFactory.createEmptyBorder());
+			
+			receiptTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+			
+			receiptTable.setFocusable(false);
+			receiptTable.setRowSelectionAllowed(false);
+			
+			JButton button = new JButton("Sign Out");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					card.show(panel, "login");
+				}
+			});
+			button.setBounds(6, 6, 117, 29);
+			receipt.add(button);
+			
+			JButton button_1 = new JButton("Order Screen");
+			button_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					card.show(panel, "order");
+				}
+			});
+			button_1.setBounds(571, 6, 117, 29);
+			receipt.add(button_1);
+			DefaultTableModel receiptModel = (DefaultTableModel) receiptTable.getModel();
+			receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "99.99"});
+			
+			JButton btnSubmitOrder = new JButton("Submit Order");
+			btnSubmitOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel receiptModel =(DefaultTableModel) receiptTable.getModel();
+					card.show(panel, "reciept");
+					receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "99.99"});
+				}
+			});
+			btnSubmitOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			btnSubmitOrder.setBounds(339, 370, 129, 44);
+			order.add(btnSubmitOrder);
+			
+			
 	 }
 	 
 	 public void Settings(){

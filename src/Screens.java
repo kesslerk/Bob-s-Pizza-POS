@@ -795,8 +795,20 @@ public class Screens extends JFrame {
 			 float toppingLargePrice;
 			 float genericSodaPrice;
 			 float allTax;
+			 
+
+				JLabel name = new JLabel("");
+				name.setBounds(321, 11, 61, 16);
+				 
 		 
 		 JPanel prices = new JPanel();
+		 prices.addComponentListener(new ComponentAdapter() {
+				@Override
+				public void componentShown(ComponentEvent e) {
+					prices.add(name);
+					name.setText(nameString);
+				}
+			});
 		 panel.add(prices, "prices");
 		 prices.setBackground(Color.WHITE);
 		 prices.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -936,10 +936,10 @@ public class Screens extends JFrame {
 			btnClear.setBounds(145, 425, 117, 29);
 			prices.add(btnClear);
 
-			JButton btnApplyChanges = new JButton("Apply Changes");
+JButton btnApplyChanges = new JButton("Apply Changes");
 			btnApplyChanges.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if ("apply".equals(e.getActionCommand())) {
+					if ("Apply Changes".equals(e.getActionCommand())) {
 						
 						BufferedReader br;
 						try {
@@ -949,11 +949,10 @@ public class Screens extends JFrame {
 				 
 				        while(line!=null){
 				            String[] prices = line.split(",");
-				            line=br.readLine();
 				            FileWriter writer = new FileWriter("Prices");
 						
 						if(Float.valueOf(pizzaSmall.getText()) > 0 && !pizzaSmall.getText().isEmpty() && prices[0].equals("pizzaSmall")){
-				             writer.write(prices[1].replace( prices[1],pizzaSmall.getText()));
+							writer.write(prices[1].replace( prices[1],pizzaSmall.getText()));
 						}
 						if(Float.valueOf(pizzaMedium.getText()) > 0 && !pizzaMedium.getText().isEmpty() && prices[0].equals("pizzaMedium")){
 							 writer.write(prices[1].replace( prices[1],pizzaMedium.getText()));
@@ -976,6 +975,7 @@ public class Screens extends JFrame {
 						if(Float.valueOf(tax.getText()) > 0 && !tax.getText().isEmpty() && prices[0].equals("tax")){
 							 writer.write(prices[1].replace( prices[1],tax.getText()));
 						}
+						line=br.readLine();
 						 writer.close();
 			 }
 				        

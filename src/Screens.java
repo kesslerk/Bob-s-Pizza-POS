@@ -1,7 +1,9 @@
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,10 +29,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -644,12 +648,6 @@ public class Screens extends JFrame {
 			lbldeleteName.setBounds(16, 288, 61, 16);
 			users.add(lbldeleteName);
 			
-			/*deleteName = new JTextField();
-			lbldeleteName.setLabelFor(deleteName);
-			deleteName.setColumns(10);
-			deleteName.setBounds(76, 288, 134, 16);
-			users.add(deleteName);*/
-			
 			JLabel lbldeletePin = new JLabel("PIN");
 			lbldeletePin.setBounds(260, 288, 61, 16);
 			users.add(lbldeletePin);
@@ -676,8 +674,6 @@ public class Screens extends JFrame {
 						PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
 
 						String line = null;
-		                
-		 
 					
 					while((line = br.readLine()) !=null){
 						 
@@ -707,9 +703,6 @@ public class Screens extends JFrame {
 					if(!tempFile.renameTo(users)){
 						System.out.println("Could not rename file");
 					}
-						
-	               
-					
 					
 					}catch(FileNotFoundException e2) {
 		                System.out.println("File not found.");
@@ -936,58 +929,80 @@ public class Screens extends JFrame {
 			btnClear.setBounds(145, 425, 117, 29);
 			prices.add(btnClear);
 
+			//update prices
 JButton btnApplyChanges = new JButton("Apply Changes");
 			btnApplyChanges.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if ("Apply Changes".equals(e.getActionCommand())) {
 						
+
+				JTextField[] priceChange = {pizzaSmall,toppingSmall,pizzaMedium,toppingMedium,pizzaLarge,toppingLarge,sodaPrice,tax};
+						
+						for(int i=0; i<priceChange.length; i++){
+							if(!priceChange[i].getText().equals("")){
+								float price = Float.parseFloat(priceChange[i].getText());
+								if(price<=0){
+									JOptionPane.showMessageDialog(null, "Please enter a positive amount","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+						}
+						
 						BufferedReader br;
-						try {
+						
+						try{
+							
+							File prices = new File("Prices");
+							File tempFile = new File(prices.getAbsolutePath() + ".tmp");
 							br = new BufferedReader(new FileReader("Prices"));
+							PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+							String line = null;
+			                
+						while((line = br.readLine()) !=null){
+							 
+							String[] prices1 = line.split(",");
+							if(Float.valueOf(pizzaSmall.getText()) > 0 && !pizzaSmall.getText().isEmpty() && prices1[0].equals("pizzaSmall")){
+								pw.println(prices1[0] + "," + pizzaSmall.getText());
+							}
+							if(Float.valueOf(pizzaMedium.getText()) > 0 && !pizzaMedium.getText().isEmpty() && prices1[0].equals("pizzaMedium")){
+								pw.println(prices1[0] + "," + pizzaMedium.getText());
+							}
+							if(Float.valueOf(pizzaLarge.getText()) > 0 && !pizzaLarge.getText().isEmpty() && prices1[0].equals("pizzaLarge")){
+								pw.println(prices1[0] + "," + pizzaLarge.getText());
+							}
+							if(Float.valueOf(toppingSmall.getText()) > 0 && !toppingSmall.getText().isEmpty() && prices1[0].equals("toppingSmall")){
+								pw.println(prices1[0] + "," + toppingSmall.getText());
+							}
+							if(Float.valueOf(toppingMedium.getText()) > 0 && !toppingMedium.getText().isEmpty() && prices1[0].equals("toppingMedium")){
+								pw.println(prices1[0] + "," + toppingMedium.getText());
+							}
+							if(Float.valueOf(toppingLarge.getText()) > 0 && !toppingLarge.getText().isEmpty() && prices1[0].equals("toppingLarge")){
+								pw.println(prices1[0] + "," + toppingLarge.getText());
+							}
+							if(Float.valueOf(sodaPrice.getText()) > 0 && !sodaPrice.getText().isEmpty() && prices1[0].equals("sodaPrice")){
+								pw.println(prices1[0] + "," + sodaPrice.getText());
+							}
+							if(Float.valueOf(tax.getText()) > 0 && !tax.getText().isEmpty() && prices1[0].equals("tax")){
+								pw.println(prices1[0] + "," + tax.getText());
+							}
+					
+		                    	  pw.flush();
+			                    
+		                    }
+		                    pw.close();
+		                    br.close();
+		                   
+						if(!tempFile.renameTo(prices)){
+							System.out.println("Could not rename file");
+						}
 						
-				        String line = br.readLine();
-				 
-				        while(line!=null){
-				            String[] prices = line.split(",");
-				            FileWriter writer = new FileWriter("Prices");
-						
-						if(Float.valueOf(pizzaSmall.getText()) > 0 && !pizzaSmall.getText().isEmpty() && prices[0].equals("pizzaSmall")){
-							writer.write(prices[1].replace( prices[1],pizzaSmall.getText()));
-						}
-						if(Float.valueOf(pizzaMedium.getText()) > 0 && !pizzaMedium.getText().isEmpty() && prices[0].equals("pizzaMedium")){
-							 writer.write(prices[1].replace( prices[1],pizzaMedium.getText()));
-						}
-						if(Float.valueOf(pizzaLarge.getText()) > 0 && !pizzaLarge.getText().isEmpty() && prices[0].equals("pizzaLarge")){
-							 writer.write(prices[1].replace( prices[1],pizzaLarge.getText()));
-						}
-						if(Float.valueOf(toppingSmall.getText()) > 0 && !toppingSmall.getText().isEmpty() && prices[0].equals("toppingSmall")){
-							 writer.write(prices[1].replace( prices[1],toppingSmall.getText()));
-						}
-						if(Float.valueOf(toppingMedium.getText()) > 0 && !toppingMedium.getText().isEmpty() && prices[0].equals("toppingMedium")){
-							 writer.write(prices[1].replace( prices[1],toppingMedium.getText()));
-						}
-						if(Float.valueOf(toppingLarge.getText()) > 0 && !toppingLarge.getText().isEmpty() && prices[0].equals("toppingLarge")){
-							 writer.write(prices[1].replace( prices[1],toppingLarge.getText()));
-						}
-						if(Float.valueOf(sodaPrice.getText()) > 0 && !sodaPrice.getText().isEmpty() && prices[0].equals("sodaPrice")){
-							 writer.write(prices[1].replace( prices[1],sodaPrice.getText()));
-						}
-						if(Float.valueOf(tax.getText()) > 0 && !tax.getText().isEmpty() && prices[0].equals("tax")){
-							 writer.write(prices[1].replace( prices[1],tax.getText()));
-						}
-						line=br.readLine();
-						 writer.close();
-			 }
-				        
-						} catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						}catch(FileNotFoundException e2) {
+			                System.out.println("File not found.");
+						}catch(IOException k){
+			                System.out.println("IO Exception.");            
 						}
 					}
-					
+				
 				}
 			});
 			btnApplyChanges.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -1033,4 +1048,3 @@ JButton btnApplyChanges = new JButton("Apply Changes");
 		}
 }
 
-	

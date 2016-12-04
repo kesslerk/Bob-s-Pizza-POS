@@ -159,7 +159,7 @@ public class Screens extends JFrame {
 			login.add(btnLogin);
 		}
 	 
-	 public void Order(){
+	public void Order(){
 		 	JPanel order;
 			JTextField Cheese;
 			JTextField Pepperoni;
@@ -170,6 +170,7 @@ public class Screens extends JFrame {
 			JTextField GreenPepper;
 			JTextField Bacon;
 			JTextField soda;
+			JTable receiptTable;
 		
 			order = new JPanel();
 			panel.add(order, "order");
@@ -503,6 +504,216 @@ public class Screens extends JFrame {
 			order.add(btnSubmitOrder);
 			
 			
+	 }
+	 
+	 public void Settings(){
+		 JPanel settings = new JPanel();
+		 panel.add(settings, "settings");
+		 settings.setBackground(Color.WHITE);
+		 settings.setBorder(new EmptyBorder(5, 5, 5, 5));
+		 settings.setLayout(null);
+			
+		JButton btnSignOut = new JButton("Sign Out");
+		btnSignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "login");
+			}
+		});
+		btnSignOut.setBounds(6, 6, 117, 29);
+		settings.add(btnSignOut);
+			
+		JButton btnOrderScreen = new JButton("Order Screen");
+		btnOrderScreen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "order");
+			}
+		});
+		btnOrderScreen.setBounds(577, 6, 117, 29);
+		settings.add(btnOrderScreen);
+			
+		JButton btnChangePrices = new JButton("Change Prices");
+		btnChangePrices.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "prices");
+			}
+		});
+		btnChangePrices.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnChangePrices.setBounds(255, 139, 167, 67);
+		settings.add(btnChangePrices);
+			
+		JButton btnUserAccouts = new JButton("User Accouts");
+		btnUserAccouts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "users");
+			}
+		});
+		btnUserAccouts.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnUserAccouts.setBounds(255, 235, 167, 67);
+		settings.add(btnUserAccouts);
+		
+	 }
+	 
+	 public void Users(){
+		 
+		JTextField addName;
+		JTextField addPin;
+		JTextField editName;
+		JTextField editPin;
+		JTextField deleteName;
+		JTextField deletePin;
+		 
+		 JPanel users = new JPanel();
+		 panel.add(users, "users");
+		 users.setBackground(Color.WHITE);
+		 users.setBorder(new EmptyBorder(5, 5, 5, 5));
+		 users.setLayout(null);
+			
+			JButton btnSignOut = new JButton("Sign Out");
+			btnSignOut.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					card.show(panel, "login");
+				}
+			});
+			btnSignOut.setBounds(6, 6, 117, 29);
+			users.add(btnSignOut);
+			
+			JButton btnOrderScreen = new JButton("Order Screen");
+			btnOrderScreen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					card.show(panel, "order");
+				}
+			});
+			btnOrderScreen.setBounds(577, 6, 117, 29);
+			users.add(btnOrderScreen);
+			
+			JLabel lblAddAUser = new JLabel("Add a User:");
+			lblAddAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblAddAUser.setBounds(6, 65, 91, 16);
+			users.add(lblAddAUser);
+			
+			addName = new JTextField();
+			addName.setBounds(76, 93, 134, 16);
+			users.add(addName);
+			addName.setColumns(10);
+			
+			JLabel lbladdName = new JLabel("Name");
+			lbladdName.setLabelFor(addName);
+			lbladdName.setBounds(16, 93, 61, 16);
+			users.add(lbladdName);
+			
+			JLabel lbladdPin = new JLabel("PIN");
+			lbladdPin.setBounds(335, 93, 61, 16);
+			users.add(lbladdPin);
+			
+			addPin = new JTextField();
+			lbladdPin.setLabelFor(addPin);
+			addPin.setColumns(10);
+			addPin.setBounds(376, 93, 134, 16);
+			users.add(addPin);
+			
+			JLabel lblEditAUser = new JLabel("Edit a User:");
+			lblEditAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblEditAUser.setBounds(6, 159, 91, 16);
+			users.add(lblEditAUser);
+			
+			JLabel lbleditName = new JLabel("Name");
+			lbleditName.setBounds(16, 187, 61, 16);
+			users.add(lbleditName);
+			
+			editName = new JTextField();
+			lbleditName.setLabelFor(editName);
+			editName.setColumns(10);
+			editName.setBounds(76, 187, 134, 16);
+			users.add(editName);
+			
+			JLabel lbleditPin = new JLabel("PIN");
+			lbleditPin.setBounds(335, 187, 61, 16);
+			users.add(lbleditPin);
+			
+			editPin = new JTextField();
+			lbleditPin.setLabelFor(editPin);
+			editPin.setColumns(10);
+			editPin.setBounds(376, 187, 134, 16);
+			users.add(editPin);
+			
+			JLabel lblDeleteAUser = new JLabel("Delete a User:");
+			lblDeleteAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblDeleteAUser.setBounds(6, 260, 117, 16);
+			users.add(lblDeleteAUser);
+			
+			JLabel lbldeleteName = new JLabel("Name");
+			lbldeleteName.setBounds(16, 288, 61, 16);
+			users.add(lbldeleteName);
+			
+			deleteName = new JTextField();
+			lbldeleteName.setLabelFor(deleteName);
+			deleteName.setColumns(10);
+			deleteName.setBounds(76, 288, 134, 16);
+			users.add(deleteName);
+			
+			JLabel lbldeletePin = new JLabel("PIN");
+			lbldeletePin.setBounds(335, 288, 61, 16);
+			users.add(lbldeletePin);
+			
+			deletePin = new JTextField();
+			lbldeletePin.setLabelFor(deletePin);
+			deletePin.setColumns(10);
+			deletePin.setBounds(376, 288, 134, 16);
+			users.add(deletePin);
+			
+			JButton btnApplyChanges = new JButton("Apply Changes");
+			btnApplyChanges.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					String pinI = addPin.getText();
+					String nameI = addName.getText();
+					if(pinI.length()!=4){
+			            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
+			        }else if("".equals(pinI)){
+			            JOptionPane.showMessageDialog(null, "PIN is empty", "Add PIN", JOptionPane.ERROR_MESSAGE);
+			        }else if("".equals(nameI)){
+			        	JOptionPane.showMessageDialog(null, "No name was entered", "Add name", JOptionPane.ERROR_MESSAGE);
+			        	
+			        }
+					BufferedReader br;
+					try{
+						br = new BufferedReader(new FileReader("Users"));
+						String line = br.readLine();
+		                boolean flag = false;
+		                
+					FileWriter writer = new FileWriter("Users", true);
+					BufferedWriter bufferedWriter = new BufferedWriter(writer);
+					bufferedWriter.newLine();
+					bufferedWriter.write(addPin.getText() +"," + addName.getText());
+					
+					
+					while(line!=null){
+	                    String[] user = line.split(",");
+	                    if(pinI.equals(user[0])){
+	                        flag = true;
+	                    }
+	                    line=br.readLine();
+	                }
+	                if(!flag){
+	                	JOptionPane.showMessageDialog(null, "Hello ", "Saved", JOptionPane.PLAIN_MESSAGE);
+	                }else{
+	                    
+	                    JOptionPane.showMessageDialog(null, "Incorrect PIN", "Incorrect PIN", JOptionPane.ERROR_MESSAGE);
+	                }
+
+					
+					bufferedWriter.close();
+					}catch(FileNotFoundException e) {
+		                System.out.println("File not found.");
+					}catch(IOException k){
+		                System.out.println("IO Exception.");            
+		            }
+				}
+					
+				
+			});
+			btnApplyChanges.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			btnApplyChanges.setBounds(297, 411, 160, 29);
+			users.add(btnApplyChanges);
 	 }
 	 
 	 public void Settings(){

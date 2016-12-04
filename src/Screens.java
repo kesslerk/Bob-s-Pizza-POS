@@ -488,7 +488,7 @@ public class Screens extends JFrame {
 		settings.add(btnUserAccouts);
 	 }
 	 
-	 public void Users(){
+	public void Users(){
 		 
 		JTextField addName;
 		JTextField addPin;
@@ -537,13 +537,13 @@ public class Screens extends JFrame {
 			users.add(lbladdName);
 			
 			JLabel lbladdPin = new JLabel("PIN");
-			lbladdPin.setBounds(335, 93, 61, 16);
+			lbladdPin.setBounds(260, 93, 61, 16);
 			users.add(lbladdPin);
 			
 			addPin = new JTextField();
 			lbladdPin.setLabelFor(addPin);
 			addPin.setColumns(10);
-			addPin.setBounds(376, 93, 134, 16);
+			addPin.setBounds(300, 93, 134, 16);
 			users.add(addPin);
 			
 			JLabel lblEditAUser = new JLabel("Edit a User:");
@@ -562,13 +562,13 @@ public class Screens extends JFrame {
 			users.add(editName);
 			
 			JLabel lbleditPin = new JLabel("PIN");
-			lbleditPin.setBounds(335, 187, 61, 16);
+			lbleditPin.setBounds(260, 187, 61, 16);
 			users.add(lbleditPin);
 			
 			editPin = new JTextField();
 			lbleditPin.setLabelFor(editPin);
 			editPin.setColumns(10);
-			editPin.setBounds(376, 187, 134, 16);
+			editPin.setBounds(300, 187, 134, 16);
 			users.add(editPin);
 			
 			JLabel lblDeleteAUser = new JLabel("Delete a User:");
@@ -580,24 +580,93 @@ public class Screens extends JFrame {
 			lbldeleteName.setBounds(16, 288, 61, 16);
 			users.add(lbldeleteName);
 			
-			deleteName = new JTextField();
+			/*deleteName = new JTextField();
 			lbldeleteName.setLabelFor(deleteName);
 			deleteName.setColumns(10);
 			deleteName.setBounds(76, 288, 134, 16);
-			users.add(deleteName);
+			users.add(deleteName);*/
 			
 			JLabel lbldeletePin = new JLabel("PIN");
-			lbldeletePin.setBounds(335, 288, 61, 16);
+			lbldeletePin.setBounds(260, 288, 61, 16);
 			users.add(lbldeletePin);
 			
 			deletePin = new JTextField();
 			lbldeletePin.setLabelFor(deletePin);
 			deletePin.setColumns(10);
-			deletePin.setBounds(376, 288, 134, 16);
+			deletePin.setBounds(300, 288, 134, 16);
 			users.add(deletePin);
 			
-			JButton btnApplyChanges = new JButton("Apply Changes");
-			btnApplyChanges.addActionListener(new ActionListener() {
+			JButton btnApplydel = new JButton("Apply Delete");
+			btnApplydel.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String pin1 = addPin.getText();
+					String name1 = addName.getText();
+					
+					BufferedReader br;
+					
+					try{
+						
+						File users = new File("Users");
+						File tempFile = new File(users.getAbsolutePath() + ".tmp");
+						br = new BufferedReader(new FileReader("Users"));
+						PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+						String line = null;
+		                
+		 
+					
+					while((line = br.readLine()) !=null){
+						 
+						System.out.println(line);
+						System.out.println(pin1 + "!!!!!!");
+						
+						String[] user = line.split(",");
+		                   //if(!pin1.equals(user[0])){
+		                    	 //System.out.println(user[0]);
+	                      if( !line.trim().startsWith(pin1)){
+	                    	  
+	                    	  pw.println(line);
+	                    	  pw.flush();
+	                    	 
+	                      } 
+		                    
+	                    }
+	                    pw.close();
+	                    br.close();
+	                   
+	                
+					if(!users.delete()){
+						System.out.println("could not delete file");
+						return;
+					}
+					
+					if(!tempFile.renameTo(users)){
+						System.out.println("Could not rename file");
+					}
+						
+	               
+					
+					
+					}catch(FileNotFoundException e2) {
+		                System.out.println("File not found.");
+					}catch(IOException k){
+		                System.out.println("IO Exception.");            
+					}
+				}
+			
+				
+			});
+			btnApplydel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			btnApplydel.setBounds(470, 280, 160, 29);
+			users.add(btnApplydel);
+			
+			JButton btnApplyedit = new JButton("Apply Edit");
+			btnApplyedit.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			btnApplyedit.setBounds(470, 181, 160, 29);
+			users.add(btnApplyedit);
+			
+			JButton btnApplyAdd = new JButton("Apply Changes");
+			btnApplyAdd.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					String pinI = addPin.getText();
 					String nameI = addName.getText();
@@ -608,7 +677,7 @@ public class Screens extends JFrame {
 			        }else if("".equals(nameI)){
 			        	JOptionPane.showMessageDialog(null, "No name was entered", "Add name", JOptionPane.ERROR_MESSAGE);
 			        	
-			        }
+			        }else{
 					BufferedReader br;
 					try{
 						br = new BufferedReader(new FileReader("Users"));
@@ -618,7 +687,7 @@ public class Screens extends JFrame {
 					FileWriter writer = new FileWriter("Users", true);
 					BufferedWriter bufferedWriter = new BufferedWriter(writer);
 					bufferedWriter.newLine();
-					bufferedWriter.write(addPin.getText() +"," + addName.getText());
+					
 					
 					
 					while(line!=null){
@@ -629,10 +698,11 @@ public class Screens extends JFrame {
 	                    line=br.readLine();
 	                }
 	                if(!flag){
-	                	JOptionPane.showMessageDialog(null, "Hello ", "Saved", JOptionPane.PLAIN_MESSAGE);
+	                	bufferedWriter.write(addPin.getText() +"," + addName.getText());
+	                	JOptionPane.showMessageDialog(null, "User Added", "User Added", JOptionPane.PLAIN_MESSAGE);
 	                }else{
 	                    
-	                    JOptionPane.showMessageDialog(null, "Incorrect PIN", "Incorrect PIN", JOptionPane.ERROR_MESSAGE);
+	                    JOptionPane.showMessageDialog(null, "PIN Already Exists", "PIN Already Exists", JOptionPane.ERROR_MESSAGE);
 	                }
 
 					
@@ -643,12 +713,12 @@ public class Screens extends JFrame {
 		                System.out.println("IO Exception.");            
 		            }
 				}
-					
+				}	
 				
 			});
-			btnApplyChanges.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			btnApplyChanges.setBounds(297, 411, 160, 29);
-			users.add(btnApplyChanges);
+			btnApplyAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			btnApplyAdd.setBounds(470, 87, 160, 29);
+			users.add(btnApplyAdd);
 	 }
 	 
 	 public void Prices(){

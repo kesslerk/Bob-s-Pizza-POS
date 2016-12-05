@@ -847,7 +847,7 @@ public class Screens extends JFrame {
 	 }
 	 
 	
-	 public void Users(){
+	  public void Users(){
 			
 			JLabel name = new JLabel("");
 			name.setBounds(321, 11, 61, 16);
@@ -961,7 +961,9 @@ public class Screens extends JFrame {
 							
 							String pin1 = deletePin.getText();
 							BufferedReader br;
-							
+							if(!isInteger(pin1)){
+								JOptionPane.showMessageDialog(null, "PIN is Incorrect", "Enter 4 Digit Pin", JOptionPane.ERROR_MESSAGE);
+							}else{
 							if(pin1.length()!=4){
 					            JOptionPane.showMessageDialog(null, "Enter correct length PIN", "PIN is not length 4", JOptionPane.ERROR_MESSAGE);
 					        }else{
@@ -1011,7 +1013,7 @@ public class Screens extends JFrame {
 							deletePin.setText("");
 						}
 						}
-						
+					}
 					
 						
 		});
@@ -1025,6 +1027,9 @@ public class Screens extends JFrame {
 							BufferedReader br;
 							String pin2 = editPin.getText();
 							String pin3 = editName.getText();
+							if(!isInteger(pin2)){
+								JOptionPane.showMessageDialog(null, "PIN is Incorrect", "Enter 4 Digit Pin", JOptionPane.ERROR_MESSAGE);
+							}else{
 							if(pin2.length()!=4 || "".equals(pin3)){
 					            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
 					        }
@@ -1068,6 +1073,7 @@ public class Screens extends JFrame {
 							editPin.setText("");
 							editName.setText("");
 						}
+						}
 
 					});
 					btnApplyedit.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -1079,6 +1085,9 @@ public class Screens extends JFrame {
 						public void actionPerformed(ActionEvent event) {
 							String pinI = addPin.getText();
 							String nameI = addName.getText();
+							if(!isInteger(pinI)){
+								JOptionPane.showMessageDialog(null, "PIN is Incorrect", "Enter 4 Digit Pin", JOptionPane.ERROR_MESSAGE);
+							}else{
 							if(pinI.length()!=4){
 					            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
 					        }else if("".equals(pinI)){
@@ -1125,7 +1134,8 @@ public class Screens extends JFrame {
 						}
 							addName.setText("");
 							addPin.setText("");
-						}	
+						}
+						}
 						
 					});
 					btnApplyAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 16));

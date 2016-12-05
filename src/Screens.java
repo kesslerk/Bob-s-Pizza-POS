@@ -1276,17 +1276,44 @@ public class Screens extends JFrame {
 		tax.setBounds(16, 395, 61, 16);
 		prices.add(tax);
 
-		JButton btnClear = new JButton("Clear");
+		JButton btnClear = new JButton("Reset to Default");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pizzaSmall.setText("");
-				pizzaMedium.setText("");
-				pizzaLarge.setText("");
-				toppingSmall.setText("");
-				toppingMedium.setText("");
-				toppingLarge.setText("");
-				sodaPrice.setText("");
-				tax.setText("");
+				BufferedReader br;
+				try {
+					br = new BufferedReader(new FileReader("Prices"));
+
+					String line = br.readLine();
+
+					while (line != null) {
+						String[] priceArray = line.split(",");
+						line = br.readLine();
+						if (priceArray[0].equals("pizzaSmall")) {
+							pizzaSmall.setText(priceArray[1]);
+						} else if (priceArray[0].equals("pizzaMedium")) {
+							pizzaMedium.setText(priceArray[1]);
+						} else if (priceArray[0].equals("pizzaLarge")) {
+							pizzaLarge.setText(priceArray[1]);
+						} else if (priceArray[0].equals("toppingSmall")) {
+							toppingSmall.setText(priceArray[1]);
+						} else if (priceArray[0].equals("toppingMedium")) {
+							toppingMedium.setText(priceArray[1]);
+						} else if (priceArray[0].equals("toppingLarge")) {
+							toppingLarge.setText(priceArray[1]);
+						} else if (priceArray[0].equals("sodaPrice")) {
+							sodaPrice.setText(priceArray[1]);
+						} else if (priceArray[0].equals("tax")) {
+							tax.setText(priceArray[1]);
+						}
+					}
+
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnClear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));

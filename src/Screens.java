@@ -905,26 +905,25 @@ public class Screens extends JFrame {
 						
 						if(pin1.length()!=4){
 				            JOptionPane.showMessageDialog(null, "Enter correct length PIN", "PIN is not length 4", JOptionPane.ERROR_MESSAGE);
-				        }else if("".equals(pin1)){
-				            JOptionPane.showMessageDialog(null, "PIN is empty", "Enter PIN", JOptionPane.ERROR_MESSAGE);
-				        }else {
-		
+				        }
+						
 						try{
+							
 							
 							File users = new File("Users");
 							File tempFile = new File(users.getAbsolutePath() + ".tmp");
 							br = new BufferedReader(new FileReader("Users"));
 							PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
 							String line = null;
-							int counter = 0;
-				
-						/*if(br.readLine() == null){
-							JOptionPane.showMessageDialog(null, "There is only one user", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
 							
-						}*/
+				
+							if(pin1.equals(pinString)){
+								JOptionPane.showMessageDialog(null, "You cannot delete your current account", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
+								
+							}else{
 						
 						while((line = br.readLine()) !=null){
-							counter++;
+							
 		                      if( !line.trim().startsWith(pin1)){
 		                    	  
 		                    	  pw.println(line);
@@ -941,15 +940,10 @@ public class Screens extends JFrame {
 							System.out.println("could not delete file");
 							return;
 						}
-						if(counter != 1){
 						if(!tempFile.renameTo(users)){
 							System.out.println("Could not rename file");
 						}
-		                }else{
-		                	JOptionPane.showMessageDialog(null, "There is only one user", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
-		                }
-		                
-				
+							}
 						}catch(FileNotFoundException e2) {
 			                System.out.println("File not found.");
 						}catch(IOException k){
@@ -957,15 +951,65 @@ public class Screens extends JFrame {
 						}
 						deletePin.setText("");
 					}
-					}
 					
+				
 					
-				});
+	});
 				btnApplydel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 				btnApplydel.setBounds(470, 280, 160, 29);
 				users.add(btnApplydel);
 				
 				JButton btnApplyedit = new JButton("Apply Edit");
+				btnApplyedit.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						BufferedReader br;
+						String pin2 = editPin.getText();
+						String pin3 = editName.getText();
+						if(pin2.length()!=4 || "".equals(pin3)){
+				            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
+				        }
+			
+						else{
+						try{
+							
+							File edit1 = new File("Users");
+							File tempFile = new File(edit1.getAbsolutePath() + ".tmp");
+							br = new BufferedReader(new FileReader("Users"));
+							PrintWriter pw = new PrintWriter(new FileWriter(tempFile));			
+							String line = null;
+							
+			                
+						while((line = br.readLine()) !=null){
+				
+							String[] editUser = line.split(",");
+										                    
+			                    if(pin2.equals(editUser[0]) || pin3.equals(editUser[1])){
+			                
+			                    	pw.println(pin2 + "," + pin3);
+			                    	pw.flush();
+			                    }else{
+			                    	pw.println(editUser[0] + "," + editUser[1]);
+			                    }
+			                }
+		                    
+		                    pw.close();
+		                    br.close();
+		                   
+						if(!tempFile.renameTo(edit1)){
+							System.out.println("Could not rename file");
+						}
+					
+						}catch(FileNotFoundException e2) {
+			                System.out.println("File not found.");
+						}catch(IOException k){
+			                System.out.println("IO Exception.");            
+						}
+					}
+						editPin.setText("");
+						editName.setText("");
+					}
+
+				});
 				btnApplyedit.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 				btnApplyedit.setBounds(470, 181, 160, 29);
 				users.add(btnApplyedit);

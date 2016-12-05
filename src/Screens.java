@@ -1336,8 +1336,7 @@ public class Screens extends JFrame {
 							if (!isFloat(priceChange[i].getText())) {
 								JOptionPane.showMessageDialog(null,"Must input a float","Incorrect Input",JOptionPane.ERROR_MESSAGE);
 							} else {
-							float price = Float.parseFloat(priceChange[i]
-									.getText());
+							float price = Float.parseFloat(priceChange[i].getText());
 							if (price <= 0) {
 								JOptionPane.showMessageDialog(null,
 										"Please enter a positive amount",
@@ -1345,9 +1344,6 @@ public class Screens extends JFrame {
 										JOptionPane.ERROR_MESSAGE);
 							}
 							}
-						}
-						for (int j = 0; j < priceChange[i].getText().length(); j++) {
-
 						}
 					}
 
@@ -1425,8 +1421,9 @@ public class Screens extends JFrame {
 							}
 
 							pw.flush();
-
+							
 						}
+						JOptionPane.showMessageDialog(null, "Changes Applied", "Changes Applied", JOptionPane.PLAIN_MESSAGE);
 					}
 						pw.close();
 						br.close();

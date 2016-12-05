@@ -1336,7 +1336,6 @@ public class Screens extends JFrame {
 						
 						for(int i=0; i<priceChange.length; i++){
 							if (!isFloat(priceChange[i].getText())) {
-								JOptionPane.showMessageDialog(null,"Must input a floatHHHHH","Incorrect Input",JOptionPane.ERROR_MESSAGE);
 								proper = false;
 							} 
 						}
@@ -1399,11 +1398,11 @@ public class Screens extends JFrame {
 					}
 						pw.close();
 						br.close();
-
-						if (!tempFile.renameTo(prices)) {
-							System.out.println("Could not rename file");
+						if(proper){
+							if (!tempFile.renameTo(prices)) {
+								System.out.println("Could not rename file");
+							}
 						}
-
 					} catch (FileNotFoundException e2) {
 						System.out.println("File not found." + e2);
 					} catch (IOException k) {

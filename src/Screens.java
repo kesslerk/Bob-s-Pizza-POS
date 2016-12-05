@@ -189,12 +189,18 @@ public class Screens extends JFrame {
 			JLabel name = new JLabel("");
 			name.setBounds(321, 11, 61, 16);
 			
+			JLabel cashier = new JLabel("");
+			cashier.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+			cashier.setBounds(361, 79, 147, 16);
+			
 			order = new JPanel();
 			order.addComponentListener(new ComponentAdapter() {
 				@Override
 				public void componentShown(ComponentEvent e) {
 					order.add(name);
 					name.setText(nameString);
+					cashier.setText(nameString);
+					
 				}
 			});
 			panel.add(order, "order");
@@ -446,6 +452,58 @@ public class Screens extends JFrame {
 			lblEnterSodaQuantity.setBounds(284, 75, 129, 16);
 			order.add(lblEnterSodaQuantity);
 			
+			
+			
+			cartTable.addMouseListener(new java.awt.event.MouseAdapter() {
+			    @Override
+			    public void mouseClicked(java.awt.event.MouseEvent evt) {
+			    	JTextField[] toppings = {Cheese, Pepperoni, Extracheese, Sausage, Onion, Mushroom, GreenPepper, Bacon};
+			    	for(int i=0; i<toppings.length; i++){
+						toppings[i].setText("");
+					}
+			    	
+			    	DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
+			        int row = cartTable.rowAtPoint(evt.getPoint());
+			        int col = cartTable.columnAtPoint(evt.getPoint());
+			        if (row >= 0 && col >= 0) {
+			            if(col == 2){
+			            	String quant = model.getValueAt(row, 0).toString();
+			            	String item = model.getValueAt(row, 1).toString();
+			            	
+			            	int counter = item.indexOf(" ");
+							String pSize="";
+							String pTop="";
+							
+							String[] topStrings = {"Cheese", "Pepperoni", "Extra Cheese", "Sausage", "Onion", "Mushroom", "GreenPepper", "Bacon"};
+							
+							if(counter>0){
+								pSize = item.substring(0, counter);
+								pTop = item.substring(counter+1, item.length());
+								
+								if(pSize.equals("Small")){
+									sizeList.setSelectedIndex(0);
+								} else if(pSize.equals("Medium")){
+									sizeList.setSelectedIndex(1);
+								} else if(pSize.equals("Large")){
+									sizeList.setSelectedIndex(2);
+								} 
+								
+								for(int i=0; i<topStrings.length; i++){
+									if(pTop.equals(topStrings[i])){
+										toppings[i].setText(quant);
+									}
+								}
+							}
+			            	
+			            	model.removeRow(row);
+			            }else if(col==3){
+			            	model.removeRow(row);
+			            }
+
+			        }
+			    }
+			});
+			
 			JButton btnClearOrder = new JButton("Clear Order");
 			btnClearOrder.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -468,7 +526,7 @@ public class Screens extends JFrame {
 			receipt.add(label);
 			
 			JScrollPane receiptScroll = new JScrollPane();
-			receiptScroll.setBounds(128, 95, 462, 320);
+			receiptScroll.setBounds(128, 107, 462, 288);
 			receipt.add(receiptScroll);
 			
 			receiptTable = new JTable(new DefaultTableModel(new Object[]{"#", "Item", "Price"},0){
@@ -486,6 +544,8 @@ public class Screens extends JFrame {
 			receiptTable.setFocusable(false);
 			receiptTable.setRowSelectionAllowed(false);
 			
+			receipt.add(cashier);
+			
 			JButton button = new JButton("Sign Out");
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -498,6 +558,8 @@ public class Screens extends JFrame {
 			JButton button_1 = new JButton("Order Screen");
 			button_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel cartModel = (DefaultTableModel) cartTable.getModel();
+					cartModel.setRowCount(0);
 					card.show(panel, "order");
 				}
 			});
@@ -513,23 +575,126 @@ public class Screens extends JFrame {
 			total.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 			total.setBounds(383, 438, 84, 16);
 			receipt.add(total);
-			DefaultTableModel receiptModel = (DefaultTableModel) receiptTable.getModel();
+			
+			JLabel lblTax = new JLabel("Tax:");
+			lblTax.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			lblTax.setBounds(310, 410, 61, 16);
+			receipt.add(lblTax);
+			
+			JLabel tax = new JLabel("");
+			tax.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			tax.setBounds(383, 410, 84, 16);
+			receipt.add(tax);
+			
+			JLabel lblCashier = new JLabel("Cashier:");
+			lblCashier.setBounds(276, 79, 61, 16);
+			receipt.add(lblCashier);
 			
 			JButton btnSubmitOrder = new JButton("Submit Order");
 			btnSubmitOrder.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					DefaultTableModel receiptModel =(DefaultTableModel) receiptTable.getModel();
+					DefaultTableModel cartModel = (DefaultTableModel) cartTable.getModel();
+					receiptModel.setRowCount(0);
+					
+					if(cartModel.getRowCount()==0){
+						JOptionPane.showMessageDialog(null, "No Items in Cart","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+					}else{
+					
 					card.show(panel, "reciept");
-					receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "99.99"});
-					receiptModel.addRow(new Object[]{"99", "Medium Green Pepper", "5.56"});
+					float taxPer = 0;
+					
+					for(int i=0; i<cartModel.getRowCount(); i++){
+						String quant = cartModel.getValueAt(i, 0).toString();
+						String it = cartModel.getValueAt(i, 1).toString();
+						int counter = it.indexOf(" ");
+						boolean soda;
+						String pSize="";
+						String pTop="";
+						
+						if(counter>0){
+							pSize = it.substring(0, counter);
+							pTop = it.substring(counter+1, it.length());
+							boolean hasTopping;
+							
+							if(pTop.equals("Cheese")){
+								hasTopping = false;
+							}else {
+								hasTopping = true;
+							}
+							
+							if(pSize.equals("Small")){
+								pSize = "pizzaSmall";
+								if(hasTopping){
+									pTop = "toppingSmall";
+								}
+							}else if(pSize.equals("Medium")){
+								pSize = "pizzaMedium";
+								if(hasTopping){
+									pTop = "toppingMedium";
+								}
+							}else if(pSize.equals("Large")){
+								pSize = "pizzaLarge";
+								if(hasTopping){
+									pTop = "toppingLarge";
+								}
+							}
+							soda=false;
+						}else{
+							soda = true;
+						}
+						
+	
+						BufferedReader br;
+						try{
+							br = new BufferedReader(new FileReader("Prices"));
+							String line = null;
+							float itemTotal=0;
+			                
+							while((line = br.readLine()) !=null){
+								String prices[] = line.split(",");
+								if(!soda){
+									if(prices[0].equals(pSize)){
+										itemTotal += Integer.parseInt(quant)*Float.parseFloat(prices[1]);
+									}
+									if(prices[0].equals(pTop)){
+										itemTotal += Integer.parseInt(quant)*Float.parseFloat(prices[1]);
+									}
+								}else{
+									if(prices[0].equals("sodaPrice")){
+										itemTotal += Integer.parseInt(quant)*Float.parseFloat(prices[1]);
+									}
+								}
+								if(prices[0].equals("tax")){
+									taxPer=Float.parseFloat(prices[1]);
+								}
+								
+							}
+							DecimalFormat df = new DecimalFormat();
+							df.setMaximumFractionDigits(2);
+							receiptModel.addRow(new Object[]{quant, it, df.format(itemTotal)});
+							br.close();
+						}catch(FileNotFoundException e2) {
+			                System.out.println("File not found.");
+						}catch(IOException k){
+			                System.out.println("IO Exception." + k);            
+						}				
+					}
 					
 					float tot = 0;
+					float taxAmount = 0;
+				
 					for(int i=0; i<receiptModel.getRowCount(); i++){
 						tot += Float.parseFloat(receiptModel.getValueAt(i, 2).toString());
 					}
+					
 					DecimalFormat df = new DecimalFormat();
 					df.setMaximumFractionDigits(2);
-					total.setText(String.valueOf(df.format(tot)));
+					
+					taxAmount = tot*taxPer;
+					tax.setText(String.valueOf(df.format(taxAmount)));
+					total.setText(String.valueOf(df.format(tot+taxAmount)));
+				}
 				}
 			});
 			btnSubmitOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -537,8 +702,7 @@ public class Screens extends JFrame {
 			order.add(btnSubmitOrder);
 			
 	 }
-	
-	 public void Settings(){
+	public void Settings(){
 		 JLabel name = new JLabel("");
 			name.setBounds(321, 11, 61, 16);
 		 

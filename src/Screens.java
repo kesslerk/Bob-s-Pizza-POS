@@ -1317,7 +1317,7 @@ public class Screens extends JFrame {
 			}
 		});
 		btnClear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnClear.setBounds(145, 425, 136, 29);
+		btnClear.setBounds(144, 426, 156, 29);
 		prices.add(btnClear);
 
 		// update prices
@@ -1523,3 +1523,4 @@ public class Screens extends JFrame {
 	}
 }
 
+	

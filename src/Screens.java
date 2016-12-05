@@ -964,7 +964,7 @@ public class Screens extends JFrame {
 							
 							if(pin1.length()!=4){
 					            JOptionPane.showMessageDialog(null, "Enter correct length PIN", "PIN is not length 4", JOptionPane.ERROR_MESSAGE);
-					        }
+					        }else{
 							
 							try{
 								
@@ -1009,6 +1009,7 @@ public class Screens extends JFrame {
 				                System.out.println("IO Exception.");            
 							}
 							deletePin.setText("");
+						}
 						}
 						
 					

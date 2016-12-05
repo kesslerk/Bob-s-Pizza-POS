@@ -989,10 +989,11 @@ public class Screens extends JFrame {
 			                    	  
 			                    	  pw.println(line);
 			                    	  pw.flush();
-			                    	 
+			                    	  
 			                      } 
 				                    
-			                    }
+			                    } JOptionPane.showMessageDialog(null, "User Deleted", "User Deleted", JOptionPane.PLAIN_MESSAGE);
+			                      
 			                    pw.close();
 			                    br.close();
 			                   
@@ -1052,11 +1053,12 @@ public class Screens extends JFrame {
 				                
 				                    	pw.println(pin2 + "," + pin3);
 				                    	pw.flush();
+				                    	
 				                    }else{
 				                    	pw.println(editUser[0] + "," + editUser[1]);
 				                    }
-				                }
-			                    
+							}
+							JOptionPane.showMessageDialog(null, "Account Edited", "Account Edited", JOptionPane.PLAIN_MESSAGE);
 			                    pw.close();
 			                    br.close();
 			                   
@@ -1069,10 +1071,12 @@ public class Screens extends JFrame {
 							}catch(IOException k){
 				                System.out.println("IO Exception." + k);            
 							}
+							
+		                      
 						}
 							editPin.setText("");
 							editName.setText("");
-						}
+						} 
 						}
 
 					});

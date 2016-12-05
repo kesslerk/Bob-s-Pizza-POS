@@ -748,10 +748,10 @@ public class Screens extends JFrame {
 								}
 
 							}
-							DecimalFormat df = new DecimalFormat();
-							df.setMaximumFractionDigits(2);
+							DecimalFormat df = new DecimalFormat("##.##");
 							receiptModel.addRow(new Object[] { quant, it,
 									df.format(itemTotal) });
+							
 							br.close();
 						} catch (FileNotFoundException e2) {
 							System.out.println("File not found." + e2);
@@ -774,6 +774,9 @@ public class Screens extends JFrame {
 					taxAmount = tot * taxPer;
 					tax.setText(String.valueOf(df.format(taxAmount)));
 					total.setText(String.valueOf(df.format(tot + taxAmount)));
+					
+					totalNumPizzas=0;
+					totalNumSodas=0;
 				}
 			}
 		});
@@ -782,6 +785,7 @@ public class Screens extends JFrame {
 		order.add(btnSubmitOrder);
 
 	}
+	
 	
 	 public void Settings(){
 		 JLabel name = new JLabel("");

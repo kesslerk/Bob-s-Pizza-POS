@@ -176,560 +176,612 @@ public class Screens extends JFrame {
 			login.add(btnLogin);
 		}
 	 
-	 public void Order(){
-		 	JPanel order;
-			JTextField Cheese;
-			JTextField Pepperoni;
-			JTextField Extracheese;
-			JTextField Sausage;
-			JTextField Onion;
-			JTextField Mushroom;
-			JTextField GreenPepper;
-			JTextField Bacon;
-			JTextField soda;
-			JTable receiptTable;
-			
-			JLabel name = new JLabel("");
-			name.setBounds(321, 11, 61, 16);
-			
-			JLabel cashier = new JLabel("");
-			cashier.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-			cashier.setBounds(361, 79, 147, 16);
-			
-			order = new JPanel();
-			order.addComponentListener(new ComponentAdapter() {
-				@Override
-				public void componentShown(ComponentEvent e) {
-					order.add(name);
-					name.setText(nameString);
-					cashier.setText(nameString);
-					
-				}
-			});
-			panel.add(order, "order");
-			order.setBackground(Color.WHITE);
-			order.setBorder(new EmptyBorder(5, 5, 5, 5));
-			order.setLayout(null);
-			
-			JLabel lblCart = new JLabel("Cart");
-			lblCart.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCart.setBounds(357, 60, 164, 16);
-			order.add(lblCart);
-			
-			JScrollPane scrollPanel = new JScrollPane();
-			scrollPanel.setBounds(419, 75, 275, 268);
-			order.add(scrollPanel);
-			JTable cartTable = new JTable(new DefaultTableModel(new Object[]{"#", "Item", "Edit", "Delete"},0));
-			scrollPanel.setViewportView(cartTable);
-			cartTable.setCellSelectionEnabled(true);
-			cartTable.getColumnModel().getColumn(0).setPreferredWidth(15);
-			cartTable.getColumnModel().getColumn(1).setPreferredWidth(130);
-			cartTable.getColumnModel().getColumn(2).setPreferredWidth(15);
-			cartTable.getColumnModel().getColumn(3).setPreferredWidth(15);
-			
-			//cartTable = new JTable();
-			cartTable.setBorder(null);
-			lblCart.setLabelFor(cartTable);
-			
-			JButton btnSignOut = new JButton("Sign Out");
-			btnSignOut.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					card.show(panel, "login");
-					
-				}
-			});
-			btnSignOut.setBounds(6, 6, 117, 29);
-			order.add(btnSignOut);
-			
-			JButton btnSettings = new JButton("Settings");
-			btnSettings.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					card.show(panel, "settings");
-				}
-			});
-			btnSettings.setBounds(577, 6, 117, 29);
-			order.add(btnSettings);
-			
-			JLabel lblPizza = new JLabel("Pizza");
-			lblPizza.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-			lblPizza.setBounds(16, 47, 61, 16);
-			order.add(lblPizza);
-			
-			JLabel lblSelectSize = new JLabel("1) Select Size");
-			lblSelectSize.setBounds(6, 75, 90, 16);
-			order.add(lblSelectSize);
-			
-			JLabel lblEnterNumber = new JLabel("2) Enter Quantities ");
-			lblEnterNumber.setBounds(108, 75, 121, 16);
-			order.add(lblEnterNumber);
-			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(6, 103, 71, 61);
-			order.add(scrollPane);
-			
-			String[] ar = {"Small", "Medium", "Large"};
-			JList sizeList = new JList(ar);
-			sizeList.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-			scrollPane.setViewportView(sizeList);
-			
-			JPanel toppingsPanel = new JPanel();
-			toppingsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			toppingsPanel.setBackground(Color.WHITE);
-			toppingsPanel.setBounds(118, 103, 140, 224);
-			order.add(toppingsPanel);
-			toppingsPanel.setLayout(null);
-			
-			JLabel lblCheese = new JLabel("Cheese");
-			lblCheese.setBounds(6, 6, 45, 16);
-			toppingsPanel.add(lblCheese);
-			
-			JLabel lblPepperoni = new JLabel("Pepperoni");
-			lblPepperoni.setBounds(6, 34, 83, 16);
-			toppingsPanel.add(lblPepperoni);
-			
-			JLabel lblNewLabel = new JLabel("Extra Cheese");
-			lblNewLabel.setBounds(6, 62, 83, 16);
-			toppingsPanel.add(lblNewLabel);
-			
-			JLabel lblSausage = new JLabel("Sausage");
-			lblSausage.setBounds(6, 90, 61, 16);
-			toppingsPanel.add(lblSausage);
-			
-			JLabel lblOnion = new JLabel("Onion");
-			lblOnion.setBounds(6, 118, 61, 16);
-			toppingsPanel.add(lblOnion);
-			
-			JLabel lblMushroom = new JLabel("Mushroom");
-			lblMushroom.setBounds(6, 146, 83, 16);
-			toppingsPanel.add(lblMushroom);
-			
-			JLabel lblGreenPepper = new JLabel("Green Pepper");
-			lblGreenPepper.setBounds(6, 174, 83, 16);
-			toppingsPanel.add(lblGreenPepper);
-			
-			JLabel lblBacon = new JLabel("Bacon");
-			lblBacon.setBounds(6, 202, 61, 16);
-			toppingsPanel.add(lblBacon);
-			
-			Cheese = new JTextField();
-			Cheese.setName("Cheese");
-			lblCheese.setLabelFor(Cheese);
-			Cheese.setBounds(89, 6, 45, 16);
-			toppingsPanel.add(Cheese);
-			Cheese.setColumns(10);
-			
-			Pepperoni = new JTextField();
-			Pepperoni.setName("Pepperoni");
-			lblPepperoni.setLabelFor(Pepperoni);
-			Pepperoni.setBounds(89, 34, 45, 16);
-			toppingsPanel.add(Pepperoni);
-			Pepperoni.setColumns(10);
-			
-			Extracheese = new JTextField();
-			Extracheese.setName("Extra Cheese");
-			lblNewLabel.setLabelFor(Extracheese);
-			Extracheese.setColumns(10);
-			Extracheese.setBounds(89, 62, 45, 16);
-			toppingsPanel.add(Extracheese);
-			
-			Sausage = new JTextField();
-			Sausage.setName("Sausage");
-			lblSausage.setLabelFor(Sausage);
-			Sausage.setColumns(10);
-			Sausage.setBounds(89, 90, 45, 16);
-			toppingsPanel.add(Sausage);
-			
-			Onion = new JTextField();
-			Onion.setName("Onion");
-			lblOnion.setLabelFor(Onion);
-			Onion.setColumns(10);
-			Onion.setBounds(89, 118, 45, 16);
-			toppingsPanel.add(Onion);
-			
-			Mushroom = new JTextField();
-			Mushroom.setName("Mushroom");
-			lblMushroom.setLabelFor(Mushroom);
-			Mushroom.setColumns(10);
-			Mushroom.setBounds(89, 146, 45, 16);
-			toppingsPanel.add(Mushroom);
-			
-			GreenPepper = new JTextField();
-			GreenPepper.setName("GreenPepper");
-			lblGreenPepper.setLabelFor(GreenPepper);
-			GreenPepper.setColumns(10);
-			GreenPepper.setBounds(89, 174, 45, 16);
-			toppingsPanel.add(GreenPepper);
-			
-			Bacon = new JTextField();
-			Bacon.setName("Bacon");
-			lblBacon.setLabelFor(Bacon);
-			Bacon.setColumns(10);
-			Bacon.setBounds(89, 202, 45, 16);
-			toppingsPanel.add(Bacon);
-			
-			JButton btnAddPizzasTo = new JButton("Add Pizzas to Cart");
-			btnAddPizzasTo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
-					
-					if(sizeList.isSelectionEmpty()){
-						JOptionPane.showMessageDialog(null, "Please Select a Pizza Size", "Incorrect Input", JOptionPane.ERROR_MESSAGE);
-					}else{
-						String size = sizeList.getSelectedValue().toString();
-						boolean flag = false;
-						String item;
-						JTextField[] toppings = {Cheese, Pepperoni, Extracheese, Sausage, Onion, Mushroom, GreenPepper, Bacon};
-						
-						for(int i=0; i<toppings.length; i++){
-							if(!toppings[i].getText().equals("")){
-								flag=true;
+	public void Order() {
+		JPanel order;
+		JTextField Cheese;
+		JTextField Pepperoni;
+		JTextField Extracheese;
+		JTextField Sausage;
+		JTextField Onion;
+		JTextField Mushroom;
+		JTextField GreenPepper;
+		JTextField Bacon;
+		JTextField soda;
+		JTable receiptTable;
+
+		JLabel name = new JLabel("");
+		name.setBounds(321, 11, 61, 16);
+
+		JLabel cashier = new JLabel("");
+		cashier.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		cashier.setBounds(361, 79, 147, 16);
+
+		order = new JPanel();
+		order.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				order.add(name);
+				name.setText(nameString);
+				cashier.setText(nameString);
+
+			}
+		});
+		panel.add(order, "order");
+		order.setBackground(Color.WHITE);
+		order.setBorder(new EmptyBorder(5, 5, 5, 5));
+		order.setLayout(null);
+
+		JLabel lblCart = new JLabel("Cart");
+		lblCart.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCart.setBounds(357, 60, 164, 16);
+		order.add(lblCart);
+
+		JScrollPane scrollPanel = new JScrollPane();
+		scrollPanel.setBounds(419, 75, 275, 268);
+		order.add(scrollPanel);
+		JTable cartTable = new JTable(new DefaultTableModel(new Object[] { "#",
+				"Item", "Edit", "Delete" }, 0));
+		scrollPanel.setViewportView(cartTable);
+		cartTable.setCellSelectionEnabled(true);
+		cartTable.getColumnModel().getColumn(0).setPreferredWidth(15);
+		cartTable.getColumnModel().getColumn(1).setPreferredWidth(130);
+		cartTable.getColumnModel().getColumn(2).setPreferredWidth(15);
+		cartTable.getColumnModel().getColumn(3).setPreferredWidth(15);
+
+		// cartTable = new JTable();
+		cartTable.setBorder(null);
+		lblCart.setLabelFor(cartTable);
+
+		JButton btnSignOut = new JButton("Sign Out");
+		btnSignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "login");
+				DefaultTableModel model = (DefaultTableModel) cartTable
+						.getModel();
+				model.setRowCount(0);
+
+			}
+		});
+		btnSignOut.setBounds(6, 6, 117, 29);
+		order.add(btnSignOut);
+
+		JButton btnSettings = new JButton("Settings");
+		btnSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "settings");
+			}
+		});
+		btnSettings.setBounds(577, 6, 117, 29);
+		order.add(btnSettings);
+
+		JLabel lblPizza = new JLabel("Pizza");
+		lblPizza.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblPizza.setBounds(16, 47, 61, 16);
+		order.add(lblPizza);
+
+		JLabel lblSelectSize = new JLabel("1) Select Size");
+		lblSelectSize.setBounds(6, 75, 90, 16);
+		order.add(lblSelectSize);
+
+		JLabel lblEnterNumber = new JLabel("2) Enter Quantities ");
+		lblEnterNumber.setBounds(108, 75, 121, 16);
+		order.add(lblEnterNumber);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 103, 71, 61);
+		order.add(scrollPane);
+
+		String[] ar = { "Small", "Medium", "Large" };
+		JList sizeList = new JList(ar);
+		sizeList.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		scrollPane.setViewportView(sizeList);
+
+		JPanel toppingsPanel = new JPanel();
+		toppingsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		toppingsPanel.setBackground(Color.WHITE);
+		toppingsPanel.setBounds(118, 103, 140, 224);
+		order.add(toppingsPanel);
+		toppingsPanel.setLayout(null);
+
+		JLabel lblCheese = new JLabel("Cheese");
+		lblCheese.setBounds(6, 6, 45, 16);
+		toppingsPanel.add(lblCheese);
+
+		JLabel lblPepperoni = new JLabel("Pepperoni");
+		lblPepperoni.setBounds(6, 34, 83, 16);
+		toppingsPanel.add(lblPepperoni);
+
+		JLabel lblNewLabel = new JLabel("Extra Cheese");
+		lblNewLabel.setBounds(6, 62, 83, 16);
+		toppingsPanel.add(lblNewLabel);
+
+		JLabel lblSausage = new JLabel("Sausage");
+		lblSausage.setBounds(6, 90, 61, 16);
+		toppingsPanel.add(lblSausage);
+
+		JLabel lblOnion = new JLabel("Onion");
+		lblOnion.setBounds(6, 118, 61, 16);
+		toppingsPanel.add(lblOnion);
+
+		JLabel lblMushroom = new JLabel("Mushroom");
+		lblMushroom.setBounds(6, 146, 83, 16);
+		toppingsPanel.add(lblMushroom);
+
+		JLabel lblGreenPepper = new JLabel("Green Pepper");
+		lblGreenPepper.setBounds(6, 174, 83, 16);
+		toppingsPanel.add(lblGreenPepper);
+
+		JLabel lblBacon = new JLabel("Bacon");
+		lblBacon.setBounds(6, 202, 61, 16);
+		toppingsPanel.add(lblBacon);
+
+		Cheese = new JTextField();
+		Cheese.setName("Cheese");
+		lblCheese.setLabelFor(Cheese);
+		Cheese.setBounds(89, 6, 45, 16);
+		toppingsPanel.add(Cheese);
+		Cheese.setColumns(10);
+
+		Pepperoni = new JTextField();
+		Pepperoni.setName("Pepperoni");
+		lblPepperoni.setLabelFor(Pepperoni);
+		Pepperoni.setBounds(89, 34, 45, 16);
+		toppingsPanel.add(Pepperoni);
+		Pepperoni.setColumns(10);
+
+		Extracheese = new JTextField();
+		Extracheese.setName("Extra Cheese");
+		lblNewLabel.setLabelFor(Extracheese);
+		Extracheese.setColumns(10);
+		Extracheese.setBounds(89, 62, 45, 16);
+		toppingsPanel.add(Extracheese);
+
+		Sausage = new JTextField();
+		Sausage.setName("Sausage");
+		lblSausage.setLabelFor(Sausage);
+		Sausage.setColumns(10);
+		Sausage.setBounds(89, 90, 45, 16);
+		toppingsPanel.add(Sausage);
+
+		Onion = new JTextField();
+		Onion.setName("Onion");
+		lblOnion.setLabelFor(Onion);
+		Onion.setColumns(10);
+		Onion.setBounds(89, 118, 45, 16);
+		toppingsPanel.add(Onion);
+
+		Mushroom = new JTextField();
+		Mushroom.setName("Mushroom");
+		lblMushroom.setLabelFor(Mushroom);
+		Mushroom.setColumns(10);
+		Mushroom.setBounds(89, 146, 45, 16);
+		toppingsPanel.add(Mushroom);
+
+		GreenPepper = new JTextField();
+		GreenPepper.setName("GreenPepper");
+		lblGreenPepper.setLabelFor(GreenPepper);
+		GreenPepper.setColumns(10);
+		GreenPepper.setBounds(89, 174, 45, 16);
+		toppingsPanel.add(GreenPepper);
+
+		Bacon = new JTextField();
+		Bacon.setName("Bacon");
+		lblBacon.setLabelFor(Bacon);
+		Bacon.setColumns(10);
+		Bacon.setBounds(89, 202, 45, 16);
+		toppingsPanel.add(Bacon);
+
+		JButton btnAddPizzasTo = new JButton("Add Pizzas to Cart");
+		btnAddPizzasTo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model = (DefaultTableModel) cartTable
+						.getModel();
+
+				if (sizeList.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							"Please Select a Pizza Size", "Incorrect Input",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					String size = sizeList.getSelectedValue().toString();
+					boolean flag = false;
+					String item;
+					JTextField[] toppings = { Cheese, Pepperoni, Extracheese,
+							Sausage, Onion, Mushroom, GreenPepper, Bacon };
+
+					for (int i = 0; i < toppings.length; i++) {
+						if (!toppings[i].getText().equals("")) {
+							flag = true;
+							if (!isInteger(toppings[i].getText())) {
+								JOptionPane.showMessageDialog(null,"Must input an integer","Incorrect Input",JOptionPane.ERROR_MESSAGE);
+							} else {
 								int amount = Integer.parseInt(toppings[i].getText());
-								if(amount<=0 || amount>100){
-									JOptionPane.showMessageDialog(null, "Number of pizzas must be between 1 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-								}else{
-									if((totalNumPizzas + Integer.parseInt(toppings[i].getText()))>100){
-										JOptionPane.showMessageDialog(null, "Can add a maximum of 100 pizzas","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-									}else{
-										totalNumPizzas += Integer.parseInt(toppings[i].getText());
-										item = size + " " + toppings[i].getName();
-										model.addRow(new Object[]{toppings[i].getText(), item, "edit", "delete"});
+								if (amount <= 0 || amount > 100) {
+									JOptionPane.showMessageDialog(null,"Number of pizzas must be between 1 and 100","Incorrect Input",JOptionPane.ERROR_MESSAGE);
+								} else {
+									if ((totalNumPizzas + Integer
+											.parseInt(toppings[i].getText())) > 100) {
+										JOptionPane
+												.showMessageDialog(
+														null,
+														"Can add a maximum of 100 pizzas",
+														"Incorrect Input",
+														JOptionPane.ERROR_MESSAGE);
+									} else {
+										totalNumPizzas += Integer
+												.parseInt(toppings[i].getText());
+										item = size + " "
+												+ toppings[i].getName();
+										model.addRow(new Object[] {
+												toppings[i].getText(), item,
+												"edit", "delete" });
 									}
 								}
 							}
 						}
-						if(!flag){
-							JOptionPane.showMessageDialog(null, "Please Select Quantity","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-						}
-						
-						for(int i=0; i<toppings.length; i++){
-							toppings[i].setText("");
-						}
-						
-						sizeList.clearSelection();	
 					}
-				}
-			});
-			btnAddPizzasTo.setBounds(54, 360, 140, 29);
-			order.add(btnAddPizzasTo);
-			
-			JLabel lblSoda = new JLabel("Soda");
-			lblSoda.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-			lblSoda.setBounds(295, 47, 61, 16);
-			order.add(lblSoda);
-			
-			JPanel sodaPanel = new JPanel();
-			sodaPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			sodaPanel.setBackground(Color.WHITE);
-			sodaPanel.setBounds(284, 103, 117, 29);
-			order.add(sodaPanel);
-			sodaPanel.setLayout(null);
-			
-			JLabel lblGeneric = new JLabel("Generic");
-			lblGeneric.setBounds(6, 6, 47, 16);
-			sodaPanel.add(lblGeneric);
-			
-			soda = new JTextField();
-			lblGeneric.setLabelFor(soda);
-			soda.setColumns(10);
-			soda.setBounds(66, 6, 45, 16);
-			sodaPanel.add(soda);
-			
-			JButton btnAddSodasTo = new JButton("Add Sodas to Cart");
-			btnAddSodasTo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
-					if(!soda.getText().equals("")){
-						int amount = Integer.parseInt(soda.getText());
-						if(amount<=0 || amount>100){
-							JOptionPane.showMessageDialog(null, "Number of sodas ust be between 1 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-						}else{
-							if((totalNumSodas + Integer.parseInt(soda.getText()))>100){
-								JOptionPane.showMessageDialog(null, "Can add a maximum of 100 sodas","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-							}else{
-								totalNumSodas += Integer.parseInt(soda.getText());
-								String item =  "Sodas";
-								model.addRow(new Object[]{soda.getText(), item, "edit", "delete"});
-								soda.setText("");
-							}
-						}
-					}else{
-						JOptionPane.showMessageDialog(null, "Please Enter Quantity","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+					if (!flag) {
+						JOptionPane.showMessageDialog(null,
+								"Please Select Quantity", "Incorrect Input",
+								JOptionPane.ERROR_MESSAGE);
 					}
-					
-				}
-			});
-			btnAddSodasTo.setBounds(270, 144, 140, 29);
-			order.add(btnAddSodasTo);
-			
-			JLabel lblEnterSodaQuantity = new JLabel("Enter Soda Quantity");
-			lblEnterSodaQuantity.setBounds(284, 75, 129, 16);
-			order.add(lblEnterSodaQuantity);
-			
-			
-			
-			cartTable.addMouseListener(new java.awt.event.MouseAdapter() {
-			    @Override
-			    public void mouseClicked(java.awt.event.MouseEvent evt) {
-			    	JTextField[] toppings = {Cheese, Pepperoni, Extracheese, Sausage, Onion, Mushroom, GreenPepper, Bacon};
-			    	for(int i=0; i<toppings.length; i++){
+
+					for (int i = 0; i < toppings.length; i++) {
 						toppings[i].setText("");
 					}
-			    	
-			    	DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
-			        int row = cartTable.rowAtPoint(evt.getPoint());
-			        int col = cartTable.columnAtPoint(evt.getPoint());
-			        if (row >= 0 && col >= 0) {
-			            if(col == 2){
-			            	String quant = model.getValueAt(row, 0).toString();
-			            	String item = model.getValueAt(row, 1).toString();
-			            	
-			            	int counter = item.indexOf(" ");
-							String pSize="";
-							String pTop="";
-							
-							String[] topStrings = {"Cheese", "Pepperoni", "Extra Cheese", "Sausage", "Onion", "Mushroom", "GreenPepper", "Bacon"};
-							
-							if(counter>0){
-								pSize = item.substring(0, counter);
-								pTop = item.substring(counter+1, item.length());
-								
-								if(pSize.equals("Small")){
-									sizeList.setSelectedIndex(0);
-								} else if(pSize.equals("Medium")){
-									sizeList.setSelectedIndex(1);
-								} else if(pSize.equals("Large")){
-									sizeList.setSelectedIndex(2);
-								} 
-								
-								totalNumPizzas -= Integer.parseInt(quant);
-								
-								for(int i=0; i<topStrings.length; i++){
-									if(pTop.equals(topStrings[i])){
-										toppings[i].setText(quant);
-									}
-								}
-							}else{
-								soda.setText(quant);
-								totalNumSodas -= Integer.parseInt(quant);
-							}
-			            	
-			            	model.removeRow(row);
-			            }else if(col==3){
-			            	String quant = model.getValueAt(row, 0).toString();
-			            	String item = model.getValueAt(row, 1).toString();
-			            	int counter = item.indexOf(" ");
-			            	
-			            	if(counter>0){
-			            		totalNumPizzas -= Integer.parseInt(quant);
-			            	}else{
-			            		totalNumSodas -= Integer.parseInt(quant);
-			            	}
-			            	
-			            	model.removeRow(row);
-			            }
 
-			        }
-			    }
-			});
-			
-			JButton btnClearOrder = new JButton("Clear Order");
-			btnClearOrder.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
-					model.setRowCount(0);
+					sizeList.clearSelection();
 				}
-			});
-			btnClearOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			btnClearOrder.setBounds(503, 370, 129, 44);
-			order.add(btnClearOrder);
-			
-			JPanel receipt = new JPanel();
-			receipt.setBackground(Color.WHITE);
-			panel.add(receipt, "reciept");
-			receipt.setLayout(null);
-			
-			JLabel label = new JLabel("Bob's Pizza");
-			label.setFont(new Font("Lucida Grande", Font.BOLD, 38));
-			label.setBounds(241, 30, 243, 53);
-			receipt.add(label);
-			
-			JScrollPane receiptScroll = new JScrollPane();
-			receiptScroll.setBounds(128, 107, 462, 288);
-			receipt.add(receiptScroll);
-			
-			receiptTable = new JTable(new DefaultTableModel(new Object[]{"#", "Item", "Price"},0){
-				public boolean isCellEditable(int rowIndex, int mColIndex) {
-			        return false;
-			    }
-			});
-			receiptScroll.setViewportView(receiptTable);
-			receiptScroll.setBorder(BorderFactory.createEmptyBorder());
-			
-			receiptTable.getColumnModel().getColumn(0).setPreferredWidth(15);
-			receiptTable.getColumnModel().getColumn(1).setPreferredWidth(130);
-			receiptTable.getColumnModel().getColumn(2).setPreferredWidth(15);
-			
-			receiptTable.setFocusable(false);
-			receiptTable.setRowSelectionAllowed(false);
-			
-			receipt.add(cashier);
-			
-			JButton button = new JButton("Sign Out");
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					card.show(panel, "login");
+			}
+		});
+		btnAddPizzasTo.setBounds(54, 360, 140, 29);
+		order.add(btnAddPizzasTo);
+
+		JLabel lblSoda = new JLabel("Soda");
+		lblSoda.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblSoda.setBounds(295, 47, 61, 16);
+		order.add(lblSoda);
+
+		JPanel sodaPanel = new JPanel();
+		sodaPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		sodaPanel.setBackground(Color.WHITE);
+		sodaPanel.setBounds(284, 103, 117, 29);
+		order.add(sodaPanel);
+		sodaPanel.setLayout(null);
+
+		JLabel lblGeneric = new JLabel("Generic");
+		lblGeneric.setBounds(6, 6, 47, 16);
+		sodaPanel.add(lblGeneric);
+
+		soda = new JTextField();
+		lblGeneric.setLabelFor(soda);
+		soda.setColumns(10);
+		soda.setBounds(66, 6, 45, 16);
+		sodaPanel.add(soda);
+
+		JButton btnAddSodasTo = new JButton("Add Sodas to Cart");
+		btnAddSodasTo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model = (DefaultTableModel) cartTable
+						.getModel();
+				if (!soda.getText().equals("")) {
+					if (!isInteger(soda.getText())) {
+						JOptionPane.showMessageDialog(null,"Must input an integer","Incorrect Input",JOptionPane.ERROR_MESSAGE);
+					} else {
+					int amount = Integer.parseInt(soda.getText());
+					if (amount <= 0 || amount > 100) {
+						JOptionPane.showMessageDialog(null,
+								"Number of sodas ust be between 1 and 100",
+								"Incorrect Input", JOptionPane.ERROR_MESSAGE);
+					} else {
+						if ((totalNumSodas + Integer.parseInt(soda.getText())) > 100) {
+							JOptionPane.showMessageDialog(null,
+									"Can add a maximum of 100 sodas",
+									"Incorrect Input",
+									JOptionPane.ERROR_MESSAGE);
+						} else {
+							totalNumSodas += Integer.parseInt(soda.getText());
+							String item = "Sodas";
+							model.addRow(new Object[] { soda.getText(), item,
+									"edit", "delete" });
+							soda.setText("");
+						}
+					}
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Please Enter Quantity", "Incorrect Input",
+							JOptionPane.ERROR_MESSAGE);
 				}
-			});
-			button.setBounds(6, 6, 117, 29);
-			receipt.add(button);
-			
-			JButton button_1 = new JButton("Order Screen");
-			button_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					DefaultTableModel cartModel = (DefaultTableModel) cartTable.getModel();
-					cartModel.setRowCount(0);
-					card.show(panel, "order");
+
+			}
+		});
+		btnAddSodasTo.setBounds(270, 144, 140, 29);
+		order.add(btnAddSodasTo);
+
+		JLabel lblEnterSodaQuantity = new JLabel("Enter Soda Quantity");
+		lblEnterSodaQuantity.setBounds(284, 75, 129, 16);
+		order.add(lblEnterSodaQuantity);
+
+		cartTable.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				JTextField[] toppings = { Cheese, Pepperoni, Extracheese,
+						Sausage, Onion, Mushroom, GreenPepper, Bacon };
+				for (int i = 0; i < toppings.length; i++) {
+					toppings[i].setText("");
 				}
-			});
-			button_1.setBounds(571, 6, 117, 29);
-			receipt.add(button_1);
-			
-			JLabel lblTotal = new JLabel("Total:");
-			lblTotal.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			lblTotal.setBounds(310, 438, 61, 16);
-			receipt.add(lblTotal);
-			
-			JLabel total = new JLabel("");
-			total.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			total.setBounds(383, 438, 84, 16);
-			receipt.add(total);
-			
-			JLabel lblTax = new JLabel("Tax:");
-			lblTax.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			lblTax.setBounds(310, 410, 61, 16);
-			receipt.add(lblTax);
-			
-			JLabel tax = new JLabel("");
-			tax.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			tax.setBounds(383, 410, 84, 16);
-			receipt.add(tax);
-			
-			JLabel lblCashier = new JLabel("Cashier:");
-			lblCashier.setBounds(276, 79, 61, 16);
-			receipt.add(lblCashier);
-			
-			JButton btnSubmitOrder = new JButton("Submit Order");
-			btnSubmitOrder.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					DefaultTableModel receiptModel =(DefaultTableModel) receiptTable.getModel();
-					DefaultTableModel cartModel = (DefaultTableModel) cartTable.getModel();
-					receiptModel.setRowCount(0);
-					
-					if(cartModel.getRowCount()==0){
-						JOptionPane.showMessageDialog(null, "No Items in Cart","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-					}else{
-					
+
+				DefaultTableModel model = (DefaultTableModel) cartTable
+						.getModel();
+				int row = cartTable.rowAtPoint(evt.getPoint());
+				int col = cartTable.columnAtPoint(evt.getPoint());
+				if (row >= 0 && col >= 0) {
+					if (col == 2) {
+						String quant = model.getValueAt(row, 0).toString();
+						String item = model.getValueAt(row, 1).toString();
+
+						int counter = item.indexOf(" ");
+						String pSize = "";
+						String pTop = "";
+
+						String[] topStrings = { "Cheese", "Pepperoni",
+								"Extra Cheese", "Sausage", "Onion", "Mushroom",
+								"GreenPepper", "Bacon" };
+
+						if (counter > 0) {
+							pSize = item.substring(0, counter);
+							pTop = item.substring(counter + 1, item.length());
+
+							if (pSize.equals("Small")) {
+								sizeList.setSelectedIndex(0);
+							} else if (pSize.equals("Medium")) {
+								sizeList.setSelectedIndex(1);
+							} else if (pSize.equals("Large")) {
+								sizeList.setSelectedIndex(2);
+							}
+
+							totalNumPizzas -= Integer.parseInt(quant);
+
+							for (int i = 0; i < topStrings.length; i++) {
+								if (pTop.equals(topStrings[i])) {
+									toppings[i].setText(quant);
+								}
+							}
+						} else {
+							soda.setText(quant);
+							totalNumSodas -= Integer.parseInt(quant);
+						}
+
+						model.removeRow(row);
+					} else if (col == 3) {
+						String quant = model.getValueAt(row, 0).toString();
+						String item = model.getValueAt(row, 1).toString();
+						int counter = item.indexOf(" ");
+
+						if (counter > 0) {
+							totalNumPizzas -= Integer.parseInt(quant);
+						} else {
+							totalNumSodas -= Integer.parseInt(quant);
+						}
+
+						model.removeRow(row);
+					}
+
+				}
+			}
+		});
+
+		JButton btnClearOrder = new JButton("Clear Order");
+		btnClearOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model = (DefaultTableModel) cartTable
+						.getModel();
+				model.setRowCount(0);
+			}
+		});
+		btnClearOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnClearOrder.setBounds(503, 370, 129, 44);
+		order.add(btnClearOrder);
+
+		JPanel receipt = new JPanel();
+		receipt.setBackground(Color.WHITE);
+		panel.add(receipt, "reciept");
+		receipt.setLayout(null);
+
+		JLabel label = new JLabel("Bob's Pizza");
+		label.setFont(new Font("Lucida Grande", Font.BOLD, 38));
+		label.setBounds(241, 30, 243, 53);
+		receipt.add(label);
+
+		JScrollPane receiptScroll = new JScrollPane();
+		receiptScroll.setBounds(128, 107, 462, 288);
+		receipt.add(receiptScroll);
+
+		receiptTable = new JTable(new DefaultTableModel(new Object[] { "#",
+				"Item", "Price" }, 0) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		});
+		receiptScroll.setViewportView(receiptTable);
+		receiptScroll.setBorder(BorderFactory.createEmptyBorder());
+
+		receiptTable.getColumnModel().getColumn(0).setPreferredWidth(15);
+		receiptTable.getColumnModel().getColumn(1).setPreferredWidth(130);
+		receiptTable.getColumnModel().getColumn(2).setPreferredWidth(15);
+
+		receiptTable.setFocusable(false);
+		receiptTable.setRowSelectionAllowed(false);
+
+		receipt.add(cashier);
+
+		JButton button = new JButton("Sign Out");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "login");
+				DefaultTableModel model = (DefaultTableModel) cartTable
+						.getModel();
+				model.setRowCount(0);
+			}
+		});
+		button.setBounds(6, 6, 117, 29);
+		receipt.add(button);
+
+		JButton button_1 = new JButton("Order Screen");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel cartModel = (DefaultTableModel) cartTable
+						.getModel();
+				cartModel.setRowCount(0);
+				card.show(panel, "order");
+			}
+		});
+		button_1.setBounds(571, 6, 117, 29);
+		receipt.add(button_1);
+
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblTotal.setBounds(310, 438, 61, 16);
+		receipt.add(lblTotal);
+
+		JLabel total = new JLabel("");
+		total.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		total.setBounds(383, 438, 84, 16);
+		receipt.add(total);
+
+		JLabel lblTax = new JLabel("Tax:");
+		lblTax.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblTax.setBounds(310, 410, 61, 16);
+		receipt.add(lblTax);
+
+		JLabel tax = new JLabel("");
+		tax.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		tax.setBounds(383, 410, 84, 16);
+		receipt.add(tax);
+
+		JLabel lblCashier = new JLabel("Cashier:");
+		lblCashier.setBounds(276, 79, 61, 16);
+		receipt.add(lblCashier);
+
+		JButton btnSubmitOrder = new JButton("Submit Order");
+		btnSubmitOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel receiptModel = (DefaultTableModel) receiptTable
+						.getModel();
+				DefaultTableModel cartModel = (DefaultTableModel) cartTable
+						.getModel();
+				receiptModel.setRowCount(0);
+
+				if (cartModel.getRowCount() == 0) {
+					JOptionPane.showMessageDialog(null, "No Items in Cart",
+							"Incorrect Input", JOptionPane.ERROR_MESSAGE);
+				} else {
+
 					card.show(panel, "reciept");
 					float taxPer = 0;
-					
-					for(int i=0; i<cartModel.getRowCount(); i++){
+
+					for (int i = 0; i < cartModel.getRowCount(); i++) {
 						String quant = cartModel.getValueAt(i, 0).toString();
 						String it = cartModel.getValueAt(i, 1).toString();
 						int counter = it.indexOf(" ");
 						boolean soda;
-						String pSize="";
-						String pTop="";
-						
-						if(counter>0){
+						String pSize = "";
+						String pTop = "";
+
+						if (counter > 0) {
 							pSize = it.substring(0, counter);
-							pTop = it.substring(counter+1, it.length());
+							pTop = it.substring(counter + 1, it.length());
 							boolean hasTopping;
-							
-							if(pTop.equals("Cheese")){
+
+							if (pTop.equals("Cheese")) {
 								hasTopping = false;
-							}else {
+							} else {
 								hasTopping = true;
 							}
-							
-							if(pSize.equals("Small")){
+
+							if (pSize.equals("Small")) {
 								pSize = "pizzaSmall";
-								if(hasTopping){
+								if (hasTopping) {
 									pTop = "toppingSmall";
 								}
-							}else if(pSize.equals("Medium")){
+							} else if (pSize.equals("Medium")) {
 								pSize = "pizzaMedium";
-								if(hasTopping){
+								if (hasTopping) {
 									pTop = "toppingMedium";
 								}
-							}else if(pSize.equals("Large")){
+							} else if (pSize.equals("Large")) {
 								pSize = "pizzaLarge";
-								if(hasTopping){
+								if (hasTopping) {
 									pTop = "toppingLarge";
 								}
 							}
-							soda=false;
-						}else{
+							soda = false;
+						} else {
 							soda = true;
 						}
-						
-	
+
 						BufferedReader br;
-						try{
+						try {
 							br = new BufferedReader(new FileReader("Prices"));
 							String line = null;
-							float itemTotal=0;
-			                
-							while((line = br.readLine()) !=null){
+							float itemTotal = 0;
+
+							while ((line = br.readLine()) != null) {
 								String prices[] = line.split(",");
-								if(!soda){
-									if(prices[0].equals(pSize)){
-										itemTotal += Integer.parseInt(quant)*Float.parseFloat(prices[1]);
+								if (!soda) {
+									if (prices[0].equals(pSize)) {
+										itemTotal += Integer.parseInt(quant)
+												* Float.parseFloat(prices[1]);
 									}
-									if(prices[0].equals(pTop)){
-										itemTotal += Integer.parseInt(quant)*Float.parseFloat(prices[1]);
+									if (prices[0].equals(pTop)) {
+										itemTotal += Integer.parseInt(quant)
+												* Float.parseFloat(prices[1]);
 									}
-								}else{
-									if(prices[0].equals("sodaPrice")){
-										itemTotal += Integer.parseInt(quant)*Float.parseFloat(prices[1]);
+								} else {
+									if (prices[0].equals("sodaPrice")) {
+										itemTotal += Integer.parseInt(quant)
+												* Float.parseFloat(prices[1]);
 									}
 								}
-								if(prices[0].equals("tax")){
-									taxPer=Float.parseFloat(prices[1]);
+								if (prices[0].equals("tax")) {
+									taxPer = Float.parseFloat(prices[1]);
 								}
-								
+
 							}
 							DecimalFormat df = new DecimalFormat();
 							df.setMaximumFractionDigits(2);
-							receiptModel.addRow(new Object[]{quant, it, df.format(itemTotal)});
+							receiptModel.addRow(new Object[] { quant, it,
+									df.format(itemTotal) });
 							br.close();
-						}catch(FileNotFoundException e2) {
-			                System.out.println("File not found." + e2);
-						}catch(IOException k){
-			                System.out.println("IO Exception." + k);            
-						}				
+						} catch (FileNotFoundException e2) {
+							System.out.println("File not found." + e2);
+						} catch (IOException k) {
+							System.out.println("IO Exception." + k);
+						}
 					}
-					
+
 					float tot = 0;
 					float taxAmount = 0;
-				
-					for(int i=0; i<receiptModel.getRowCount(); i++){
-						tot += Float.parseFloat(receiptModel.getValueAt(i, 2).toString());
+
+					for (int i = 0; i < receiptModel.getRowCount(); i++) {
+						tot += Float.parseFloat(receiptModel.getValueAt(i, 2)
+								.toString());
 					}
-					
+
 					DecimalFormat df = new DecimalFormat();
 					df.setMaximumFractionDigits(2);
-					
-					taxAmount = tot*taxPer;
+
+					taxAmount = tot * taxPer;
 					tax.setText(String.valueOf(df.format(taxAmount)));
-					total.setText(String.valueOf(df.format(tot+taxAmount)));
+					total.setText(String.valueOf(df.format(tot + taxAmount)));
 				}
-				}
-			});
-			btnSubmitOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			btnSubmitOrder.setBounds(339, 370, 129, 44);
-			order.add(btnSubmitOrder);
-			
-	 }
+			}
+		});
+		btnSubmitOrder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnSubmitOrder.setBounds(339, 370, 129, 44);
+		order.add(btnSubmitOrder);
+
+	}
 	
 	 public void Settings(){
 		 JLabel name = new JLabel("");
@@ -1076,289 +1128,369 @@ public class Screens extends JFrame {
 					users.add(btnApplyAdd);
 			 }
 	 
-	public void Prices(){
-		  JPanel contentPane;
-			 JTextField pizzaSmall;
-			 JTextField pizzaMedium;
-			 JTextField pizzaLarge;
-			 JTextField toppingSmall;
-			 JTextField toppingMedium;
-			 JTextField toppingLarge;
-			 JTextField sodaPrice;
-			 JTextField tax;
-			 float pizzaSmallPrice;
-			 float pizzaMediumPrice;
-			 float pizzaLargePrice;
-			 float toppingSmallPrice;
-			 float toppingMediumPrice;
-			 float toppingLargePrice;
-			 float genericSodaPrice;
-			 float allTax;
-			 
+	public void Prices() {
+		JPanel contentPane;
+		JTextField pizzaSmall;
+		JTextField pizzaMedium;
+		JTextField pizzaLarge;
+		JTextField toppingSmall;
+		JTextField toppingMedium;
+		JTextField toppingLarge;
+		JTextField sodaPrice;
+		JTextField tax;
+		float pizzaSmallPrice;
+		float pizzaMediumPrice;
+		float pizzaLargePrice;
+		float toppingSmallPrice;
+		float toppingMediumPrice;
+		float toppingLargePrice;
+		float genericSodaPrice;
+		float allTax;
 
-				JLabel name = new JLabel("");
-				name.setBounds(321, 11, 61, 16);
-				 
-		 
-		 JPanel prices = new JPanel();
-		 prices.addComponentListener(new ComponentAdapter() {
-				@Override
-				public void componentShown(ComponentEvent e) {
-					prices.add(name);
-					name.setText(nameString);
-				}
-			});
-		 panel.add(prices, "prices");
-		 prices.setBackground(Color.WHITE);
-		 prices.setBorder(new EmptyBorder(5, 5, 5, 5));
-		 prices.setLayout(null);
+		JLabel name = new JLabel("");
+		name.setBounds(321, 11, 61, 16);
 
-			JButton btnSignOut = new JButton("Sign Out");
-			btnSignOut.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					card.show(panel, "login");
-					
-				}
-			});
-			btnSignOut.setBounds(6, 6, 117, 29);
-			prices.add(btnSignOut);
+		JPanel prices = new JPanel();
+		prices.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				prices.add(name);
+				name.setText(nameString);
+			}
+		});
+		panel.add(prices, "prices");
+		prices.setBackground(Color.WHITE);
+		prices.setBorder(new EmptyBorder(5, 5, 5, 5));
+		prices.setLayout(null);
 
-			JButton btnOrderScreen = new JButton("Order Screen");
-			btnOrderScreen.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					card.show(panel, "order");
-				}
-			});
-			btnOrderScreen.setBounds(577, 6, 117, 29);
-			prices.add(btnOrderScreen);
-			
-			JLabel lblPizzaPrice = new JLabel("Pizza Price");
-			lblPizzaPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lblPizzaPrice.setBounds(6, 65, 97, 16);
-			prices.add(lblPizzaPrice);
+		JButton btnSignOut = new JButton("Sign Out");
+		btnSignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "login");
 
-			JLabel lblpizzaSmall = new JLabel("Small");
-			lblpizzaSmall.setBounds(16, 93, 61, 16);
-			prices.add(lblpizzaSmall);
+			}
+		});
+		btnSignOut.setBounds(6, 6, 117, 29);
+		prices.add(btnSignOut);
 
-			pizzaSmall = new JTextField();
-			lblpizzaSmall.setLabelFor(pizzaSmall);
-			pizzaSmall.setBounds(89, 93, 61, 16);
-			prices.add(pizzaSmall);
-			pizzaSmall.setColumns(10);
+		JButton btnOrderScreen = new JButton("Order Screen");
+		btnOrderScreen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panel, "order");
+			}
+		});
+		btnOrderScreen.setBounds(577, 6, 117, 29);
+		prices.add(btnOrderScreen);
 
-			JLabel lblpizzaMedium = new JLabel("Medium");
-			lblpizzaMedium.setBounds(201, 93, 61, 16);
-			prices.add(lblpizzaMedium);
+		JLabel lblPizzaPrice = new JLabel("Pizza Price");
+		lblPizzaPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblPizzaPrice.setBounds(6, 65, 97, 16);
+		prices.add(lblPizzaPrice);
 
-			pizzaMedium = new JTextField();
-			lblpizzaMedium.setLabelFor(pizzaMedium);
-			pizzaMedium.setColumns(10);
-			pizzaMedium.setBounds(274, 93, 61, 16);
-			prices.add(pizzaMedium);
+		JLabel lblpizzaSmall = new JLabel("Small");
+		lblpizzaSmall.setBounds(16, 93, 61, 16);
+		prices.add(lblpizzaSmall);
 
-			JLabel lblpizzaLarge = new JLabel("Large");
-			lblpizzaLarge.setBounds(416, 93, 61, 16);
-			prices.add(lblpizzaLarge);
+		pizzaSmall = new JTextField();
+		lblpizzaSmall.setLabelFor(pizzaSmall);
+		pizzaSmall.setBounds(89, 93, 61, 16);
+		prices.add(pizzaSmall);
+		pizzaSmall.setColumns(10);
 
-			pizzaLarge = new JTextField();
-			lblpizzaLarge.setLabelFor(pizzaLarge);
-			pizzaLarge.setColumns(10);
-			pizzaLarge.setBounds(478, 93, 61, 16);
-			prices.add(pizzaLarge);
+		JLabel lblpizzaMedium = new JLabel("Medium");
+		lblpizzaMedium.setBounds(201, 93, 61, 16);
+		prices.add(lblpizzaMedium);
 
-			JLabel lblToppingPrice = new JLabel("Topping Price");
-			lblToppingPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lblToppingPrice.setBounds(6, 168, 117, 19);
-			prices.add(lblToppingPrice);
+		pizzaMedium = new JTextField();
+		lblpizzaMedium.setLabelFor(pizzaMedium);
+		pizzaMedium.setColumns(10);
+		pizzaMedium.setBounds(274, 93, 61, 16);
+		prices.add(pizzaMedium);
 
-			JLabel lbltoppingSmall = new JLabel("Small");
-			lbltoppingSmall.setBounds(16, 199, 61, 16);
-			prices.add(lbltoppingSmall);
+		JLabel lblpizzaLarge = new JLabel("Large");
+		lblpizzaLarge.setBounds(416, 93, 61, 16);
+		prices.add(lblpizzaLarge);
 
-			toppingSmall = new JTextField();
-			lbltoppingSmall.setLabelFor(toppingSmall);
-			toppingSmall.setColumns(10);
-			toppingSmall.setBounds(89, 199, 61, 16);
-			prices.add(toppingSmall);
+		pizzaLarge = new JTextField();
+		lblpizzaLarge.setLabelFor(pizzaLarge);
+		pizzaLarge.setColumns(10);
+		pizzaLarge.setBounds(478, 93, 61, 16);
+		prices.add(pizzaLarge);
 
-			JLabel lbltoppingMedium = new JLabel("Medium");
-			lbltoppingMedium.setBounds(201, 199, 61, 16);
-			prices.add(lbltoppingMedium);
+		JLabel lblToppingPrice = new JLabel("Topping Price");
+		lblToppingPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblToppingPrice.setBounds(6, 168, 117, 19);
+		prices.add(lblToppingPrice);
 
-			toppingMedium = new JTextField();
-			lbltoppingMedium.setLabelFor(toppingMedium);
-			toppingMedium.setColumns(10);
-			toppingMedium.setBounds(274, 199, 61, 16);
-			prices.add(toppingMedium);
+		JLabel lbltoppingSmall = new JLabel("Small");
+		lbltoppingSmall.setBounds(16, 199, 61, 16);
+		prices.add(lbltoppingSmall);
 
-			JLabel lbltoppingLarge = new JLabel("Large");
-			lbltoppingLarge.setBounds(416, 199, 61, 16);
-			prices.add(lbltoppingLarge);
+		toppingSmall = new JTextField();
+		lbltoppingSmall.setLabelFor(toppingSmall);
+		toppingSmall.setColumns(10);
+		toppingSmall.setBounds(89, 199, 61, 16);
+		prices.add(toppingSmall);
 
-			toppingLarge = new JTextField();
-			lbltoppingLarge.setLabelFor(toppingLarge);
-			toppingLarge.setColumns(10);
-			toppingLarge.setBounds(478, 199, 61, 16);
-			prices.add(toppingLarge);
+		JLabel lbltoppingMedium = new JLabel("Medium");
+		lbltoppingMedium.setBounds(201, 199, 61, 16);
+		prices.add(lbltoppingMedium);
 
-			JLabel lblSodaPrice = new JLabel("Soda Price");
-			lblSodaPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lblSodaPrice.setBounds(6, 273, 97, 16);
-			prices.add(lblSodaPrice);
+		toppingMedium = new JTextField();
+		lbltoppingMedium.setLabelFor(toppingMedium);
+		toppingMedium.setColumns(10);
+		toppingMedium.setBounds(274, 199, 61, 16);
+		prices.add(toppingMedium);
 
-			sodaPrice = new JTextField();
-			sodaPrice.setColumns(10);
-			sodaPrice.setBounds(16, 301, 61, 16);
-			prices.add(sodaPrice);
+		JLabel lbltoppingLarge = new JLabel("Large");
+		lbltoppingLarge.setBounds(416, 199, 61, 16);
+		prices.add(lbltoppingLarge);
 
-			JLabel lblTax = new JLabel("Tax");
-			lblTax.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lblTax.setBounds(6, 367, 61, 16);
-			prices.add(lblTax);
+		toppingLarge = new JTextField();
+		lbltoppingLarge.setLabelFor(toppingLarge);
+		toppingLarge.setColumns(10);
+		toppingLarge.setBounds(478, 199, 61, 16);
+		prices.add(toppingLarge);
 
-			tax = new JTextField();
-			tax.setColumns(10);
-			tax.setBounds(16, 395, 61, 16);
-			prices.add(tax);
+		JLabel lblSodaPrice = new JLabel("Soda Price");
+		lblSodaPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblSodaPrice.setBounds(6, 273, 97, 16);
+		prices.add(lblSodaPrice);
 
-			JButton btnClear = new JButton("Clear");
-			btnClear.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pizzaSmall.setText("");
-					pizzaMedium.setText("");
-					pizzaLarge.setText("");
-					toppingSmall.setText("");
-					toppingMedium.setText("");
-					toppingLarge.setText("");
-					sodaPrice.setText("");
-					tax.setText("");
-				}
-			});
-			btnClear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			btnClear.setBounds(145, 425, 117, 29);
-			prices.add(btnClear);
+		sodaPrice = new JTextField();
+		sodaPrice.setColumns(10);
+		sodaPrice.setBounds(16, 301, 61, 16);
+		prices.add(sodaPrice);
 
-			//update prices
-JButton btnApplyChanges = new JButton("Apply Changes");
-			btnApplyChanges.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if ("Apply Changes".equals(e.getActionCommand())) {
-						
+		JLabel lblTax = new JLabel("Tax");
+		lblTax.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblTax.setBounds(6, 367, 61, 16);
+		prices.add(lblTax);
 
-				JTextField[] priceChange = {pizzaSmall,toppingSmall,pizzaMedium,toppingMedium,pizzaLarge,toppingLarge,sodaPrice,tax};
-						
-						for(int i=0; i<priceChange.length; i++){
-							if(!priceChange[i].getText().equals("")){
-								float price = Float.parseFloat(priceChange[i].getText());
-								if(price<=0){
-									JOptionPane.showMessageDialog(null, "Please enter a positive amount","Incorrect Input", JOptionPane.ERROR_MESSAGE);
-								}
+		tax = new JTextField();
+		tax.setColumns(10);
+		tax.setBounds(16, 395, 61, 16);
+		prices.add(tax);
+
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pizzaSmall.setText("");
+				pizzaMedium.setText("");
+				pizzaLarge.setText("");
+				toppingSmall.setText("");
+				toppingMedium.setText("");
+				toppingLarge.setText("");
+				sodaPrice.setText("");
+				tax.setText("");
+			}
+		});
+		btnClear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnClear.setBounds(145, 425, 117, 29);
+		prices.add(btnClear);
+
+		// update prices
+		JButton btnApplyChanges = new JButton("Apply Changes");
+		btnApplyChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if ("Apply Changes".equals(e.getActionCommand())) {
+
+					JTextField[] priceChange = { pizzaSmall, toppingSmall,
+							pizzaMedium, toppingMedium, pizzaLarge,
+							toppingLarge, sodaPrice, tax };
+
+					for (int i = 0; i < priceChange.length; i++) {
+						if (!priceChange[i].getText().equals("")) {
+							if (!isFloat(priceChange[i].getText())) {
+								JOptionPane.showMessageDialog(null,"Must input a float","Incorrect Input",JOptionPane.ERROR_MESSAGE);
+							} else {
+							float price = Float.parseFloat(priceChange[i]
+									.getText());
+							if (price <= 0) {
+								JOptionPane.showMessageDialog(null,
+										"Please enter a positive amount",
+										"Incorrect Input",
+										JOptionPane.ERROR_MESSAGE);
 							}
-							for(int j=0; j<priceChange[i].getText().length(); j++){
-								
 							}
 						}
-						
-						BufferedReader br;
-						
-						try{
-							
-							File prices = new File("Prices");
-							File tempFile = new File(prices.getAbsolutePath() + ".tmp");
-							br = new BufferedReader(new FileReader("Prices"));
-							PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+						for (int j = 0; j < priceChange[i].getText().length(); j++) {
 
-							String line = null;
-			                
-						while((line = br.readLine()) !=null){
-							 
-							String[] prices1 = line.split(",");
-							if(Float.valueOf(pizzaSmall.getText()) > 0 && !pizzaSmall.getText().isEmpty() && prices1[0].equals("pizzaSmall")){
-								pw.println(prices1[0] + "," + pizzaSmall.getText());
-							}
-							if(Float.valueOf(pizzaMedium.getText()) > 0 && !pizzaMedium.getText().isEmpty() && prices1[0].equals("pizzaMedium")){
-								pw.println(prices1[0] + "," + pizzaMedium.getText());
-							}
-							if(Float.valueOf(pizzaLarge.getText()) > 0 && !pizzaLarge.getText().isEmpty() && prices1[0].equals("pizzaLarge")){
-								pw.println(prices1[0] + "," + pizzaLarge.getText());
-							}
-							if(Float.valueOf(toppingSmall.getText()) > 0 && !toppingSmall.getText().isEmpty() && prices1[0].equals("toppingSmall")){
-								pw.println(prices1[0] + "," + toppingSmall.getText());
-							}
-							if(Float.valueOf(toppingMedium.getText()) > 0 && !toppingMedium.getText().isEmpty() && prices1[0].equals("toppingMedium")){
-								pw.println(prices1[0] + "," + toppingMedium.getText());
-							}
-							if(Float.valueOf(toppingLarge.getText()) > 0 && !toppingLarge.getText().isEmpty() && prices1[0].equals("toppingLarge")){
-								pw.println(prices1[0] + "," + toppingLarge.getText());
-							}
-							if(Float.valueOf(sodaPrice.getText()) > 0 && !sodaPrice.getText().isEmpty() && prices1[0].equals("sodaPrice")){
-								pw.println(prices1[0] + "," + sodaPrice.getText());
-							}
-							if(Float.valueOf(tax.getText()) > 0 && !tax.getText().isEmpty() && prices1[0].equals("tax")){
-								pw.println(prices1[0] + "," + tax.getText());
-							}
-					
-		                    	  pw.flush();
-			                    
-		                    }
-		                    pw.close();
-		                    br.close();
-		                   
-						if(!tempFile.renameTo(prices)){
-							System.out.println("Could not rename file");
-						}
-						
-						}catch(FileNotFoundException e2) {
-			                System.out.println("File not found." + e2);
-						}catch(IOException k){
-			                System.out.println("IO Exception." + k);            
 						}
 					}
-				
+
+					BufferedReader br;
+
+					try {
+
+						File prices = new File("Prices");
+						File tempFile = new File(prices.getAbsolutePath()
+								+ ".tmp");
+						br = new BufferedReader(new FileReader("Prices"));
+						PrintWriter pw = new PrintWriter(new FileWriter(
+								tempFile));
+
+						String line = null;
+						
+						boolean proper = true;
+						
+						for(int i=0; i<priceChange.length; i++){
+							if (!isFloat(priceChange[i].getText())) {
+								JOptionPane.showMessageDialog(null,"Must input a floatHHHHH","Incorrect Input",JOptionPane.ERROR_MESSAGE);
+								proper = false;
+							} 
+						}
+
+						if(proper){
+						while ((line = br.readLine()) != null) {
+
+							String[] prices1 = line.split(",");
+							if (Float.valueOf(pizzaSmall.getText()) > 0
+									&& !pizzaSmall.getText().isEmpty()
+									&& prices1[0].equals("pizzaSmall")) {
+								pw.println(prices1[0] + ","
+										+ pizzaSmall.getText());
+							}
+							if (Float.valueOf(pizzaMedium.getText()) > 0
+									&& !pizzaMedium.getText().isEmpty()
+									&& prices1[0].equals("pizzaMedium")) {
+								pw.println(prices1[0] + ","
+										+ pizzaMedium.getText());
+							}
+							if (Float.valueOf(pizzaLarge.getText()) > 0
+									&& !pizzaLarge.getText().isEmpty()
+									&& prices1[0].equals("pizzaLarge")) {
+								pw.println(prices1[0] + ","
+										+ pizzaLarge.getText());
+							}
+							if (Float.valueOf(toppingSmall.getText()) > 0
+									&& !toppingSmall.getText().isEmpty()
+									&& prices1[0].equals("toppingSmall")) {
+								pw.println(prices1[0] + ","
+										+ toppingSmall.getText());
+							}
+							if (Float.valueOf(toppingMedium.getText()) > 0
+									&& !toppingMedium.getText().isEmpty()
+									&& prices1[0].equals("toppingMedium")) {
+								pw.println(prices1[0] + ","
+										+ toppingMedium.getText());
+							}
+							if (Float.valueOf(toppingLarge.getText()) > 0
+									&& !toppingLarge.getText().isEmpty()
+									&& prices1[0].equals("toppingLarge")) {
+								pw.println(prices1[0] + ","
+										+ toppingLarge.getText());
+							}
+							if (Float.valueOf(sodaPrice.getText()) > 0
+									&& !sodaPrice.getText().isEmpty()
+									&& prices1[0].equals("sodaPrice")) {
+								pw.println(prices1[0] + ","
+										+ sodaPrice.getText());
+							}
+							if (Float.valueOf(tax.getText()) > 0
+									&& !tax.getText().isEmpty()
+									&& prices1[0].equals("tax")) {
+								pw.println(prices1[0] + "," + tax.getText());
+							}
+
+							pw.flush();
+
+						}
+					}
+						pw.close();
+						br.close();
+
+						if (!tempFile.renameTo(prices)) {
+							System.out.println("Could not rename file");
+						}
+
+					} catch (FileNotFoundException e2) {
+						System.out.println("File not found." + e2);
+					} catch (IOException k) {
+						System.out.println("IO Exception." + k);
+					}
 				}
-			});
-			btnApplyChanges.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-			btnApplyChanges.setBounds(328, 426, 168, 29);
-			prices.add(btnApplyChanges);
-			
-			//autofill with default prices
-			BufferedReader br;
-			try {		
-				br = new BufferedReader(new FileReader("Prices"));
-			
-	        String line = br.readLine();
-	 
-	        while(line!=null){
-	            String[] priceArray = line.split(",");
-	            line=br.readLine();
-	            if(priceArray[0].equals("pizzaSmall")){
-	            	pizzaSmall.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("pizzaMedium")){
-	            	pizzaMedium.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("pizzaLarge")){
-	            	pizzaLarge.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("toppingSmall")){
-	            	toppingSmall.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("toppingMedium")){
-	            	toppingMedium.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("toppingLarge")){
-	            	toppingLarge.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("sodaPrice")){
-	            	sodaPrice.setText(priceArray[1]);
-	            }else if(priceArray[0].equals("tax")){
-	            	tax.setText(priceArray[1]);
-	            }
-	        }
-	        
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+
+			}
+		});
+		btnApplyChanges.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnApplyChanges.setBounds(328, 426, 168, 29);
+		prices.add(btnApplyChanges);
+
+		// autofill with default prices
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("Prices"));
+
+			String line = br.readLine();
+
+			while (line != null) {
+				String[] priceArray = line.split(",");
+				line = br.readLine();
+				if (priceArray[0].equals("pizzaSmall")) {
+					pizzaSmall.setText(priceArray[1]);
+				} else if (priceArray[0].equals("pizzaMedium")) {
+					pizzaMedium.setText(priceArray[1]);
+				} else if (priceArray[0].equals("pizzaLarge")) {
+					pizzaLarge.setText(priceArray[1]);
+				} else if (priceArray[0].equals("toppingSmall")) {
+					toppingSmall.setText(priceArray[1]);
+				} else if (priceArray[0].equals("toppingMedium")) {
+					toppingMedium.setText(priceArray[1]);
+				} else if (priceArray[0].equals("toppingLarge")) {
+					toppingLarge.setText(priceArray[1]);
+				} else if (priceArray[0].equals("sodaPrice")) {
+					sodaPrice.setText(priceArray[1]);
+				} else if (priceArray[0].equals("tax")) {
+					tax.setText(priceArray[1]);
+				}
+			}
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	public boolean isInteger(String str) {
+		if (str == null) {
+			return false;
+		}
+		int length = str.length();
+		if (length == 0) {
+			return false;
+		}
+		int i = 0;
+		if (str.charAt(0) == '-') {
+			if (length == 1) {
+				return false;
+			}
+			i = 1;
+		}
+		for (; i < length; i++) {
+			char c = str.charAt(i);
+			if (c < '0' || c > '9') {
+				return false;
 			}
 		}
+		return true;
+	}
+	
+	public boolean isFloat(String str){
+		try
+		{
+		 Float.parseFloat(str);
+		}
+		catch(NumberFormatException e)
+		{
+		  return false;
+		}
+		return true;
+
+	}
 }
 
 	

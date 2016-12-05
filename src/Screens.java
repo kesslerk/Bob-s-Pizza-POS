@@ -384,8 +384,13 @@ public class Screens extends JFrame {
 								if(amount<=0 || amount>100){
 									JOptionPane.showMessageDialog(null, "Number of pizzas must be between 1 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
 								}else{
-									item = size + " " + toppings[i].getName();
-									model.addRow(new Object[]{toppings[i].getText(), item, "edit", "delete"});
+									if((totalNumPizzas + Integer.parseInt(toppings[i].getText()))>100){
+										JOptionPane.showMessageDialog(null, "Can add a maximum of 100 pizzas","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+									}else{
+										totalNumPizzas += Integer.parseInt(toppings[i].getText());
+										item = size + " " + toppings[i].getName();
+										model.addRow(new Object[]{toppings[i].getText(), item, "edit", "delete"});
+									}
 								}
 							}
 						}
@@ -435,9 +440,14 @@ public class Screens extends JFrame {
 						if(amount<=0 || amount>100){
 							JOptionPane.showMessageDialog(null, "Number of sodas ust be between 1 and 100","Incorrect Input", JOptionPane.ERROR_MESSAGE);
 						}else{
-							String item =  "Sodas";
-							model.addRow(new Object[]{soda.getText(), item, "edit", "delete"});
-							soda.setText("");
+							if((totalNumSodas + Integer.parseInt(soda.getText()))>100){
+								JOptionPane.showMessageDialog(null, "Can add a maximum of 100 sodas","Incorrect Input", JOptionPane.ERROR_MESSAGE);
+							}else{
+								totalNumSodas += Integer.parseInt(soda.getText());
+								String item =  "Sodas";
+								model.addRow(new Object[]{soda.getText(), item, "edit", "delete"});
+								soda.setText("");
+							}
 						}
 					}else{
 						JOptionPane.showMessageDialog(null, "Please Enter Quantity","Incorrect Input", JOptionPane.ERROR_MESSAGE);
@@ -488,15 +498,30 @@ public class Screens extends JFrame {
 									sizeList.setSelectedIndex(2);
 								} 
 								
+								totalNumPizzas -= Integer.parseInt(quant);
+								
 								for(int i=0; i<topStrings.length; i++){
 									if(pTop.equals(topStrings[i])){
 										toppings[i].setText(quant);
 									}
 								}
+							}else{
+								soda.setText(quant);
+								totalNumSodas -= Integer.parseInt(quant);
 							}
 			            	
 			            	model.removeRow(row);
 			            }else if(col==3){
+			            	String quant = model.getValueAt(row, 0).toString();
+			            	String item = model.getValueAt(row, 1).toString();
+			            	int counter = item.indexOf(" ");
+			            	
+			            	if(counter>0){
+			            		totalNumPizzas -= Integer.parseInt(quant);
+			            	}else{
+			            		totalNumSodas -= Integer.parseInt(quant);
+			            	}
+			            	
 			            	model.removeRow(row);
 			            }
 
@@ -702,6 +727,7 @@ public class Screens extends JFrame {
 			order.add(btnSubmitOrder);
 			
 	 }
+	
 	public void Settings(){
 		 JLabel name = new JLabel("");
 			name.setBounds(321, 11, 61, 16);

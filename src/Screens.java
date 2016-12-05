@@ -33,9 +33,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -47,6 +48,8 @@ public class Screens extends JFrame {
 	private CardLayout card;
 	private String pinString;
 	private String nameString;
+	private int totalNumPizzas = 0;
+	private int totalNumSodas = 0;
 	
 
 	/**
@@ -173,7 +176,7 @@ public class Screens extends JFrame {
 			login.add(btnLogin);
 		}
 	 
-	public void Order(){
+	 public void Order(){
 		 	JPanel order;
 			JTextField Cheese;
 			JTextField Pepperoni;
@@ -700,7 +703,7 @@ public class Screens extends JFrame {
 							receiptModel.addRow(new Object[]{quant, it, df.format(itemTotal)});
 							br.close();
 						}catch(FileNotFoundException e2) {
-			                System.out.println("File not found.");
+			                System.out.println("File not found." + e2);
 						}catch(IOException k){
 			                System.out.println("IO Exception." + k);            
 						}				
@@ -728,7 +731,7 @@ public class Screens extends JFrame {
 			
 	 }
 	
-	public void Settings(){
+	 public void Settings(){
 		 JLabel name = new JLabel("");
 			name.setBounds(321, 11, 61, 16);
 		 
@@ -788,290 +791,290 @@ public class Screens extends JFrame {
 	 }
 	 
 	
-	public void Users(){
-		
-		JLabel name = new JLabel("");
-		name.setBounds(321, 11, 61, 16);
-			 
-			JTextField addName;
-			JTextField addPin;
-			JTextField editName;
-			JTextField editPin;
-			JTextField deleteName;
-			JTextField deletePin;
-			 
-			 JPanel users = new JPanel();
-			 users.addComponentListener(new ComponentAdapter() {
-					@Override
-					public void componentShown(ComponentEvent e) {
-						users.add(name);
-						name.setText(nameString);
-					}
-				});
-			 panel.add(users, "users");
-			 users.setBackground(Color.WHITE);
-			 users.setBorder(new EmptyBorder(5, 5, 5, 5));
-			 users.setLayout(null);
-				
-				JButton btnSignOut = new JButton("Sign Out");
-				btnSignOut.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						card.show(panel, "login");
-					}
-				});
-				btnSignOut.setBounds(6, 6, 117, 29);
-				users.add(btnSignOut);
-				
-				JButton btnOrderScreen = new JButton("Order Screen");
-				btnOrderScreen.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						card.show(panel, "order");
-					}
-				});
-				btnOrderScreen.setBounds(577, 6, 117, 29);
-				users.add(btnOrderScreen);
-				
-				JLabel lblAddAUser = new JLabel("Add a User:");
-				lblAddAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				lblAddAUser.setBounds(6, 65, 91, 16);
-				users.add(lblAddAUser);
-				
-				addName = new JTextField();
-				addName.setBounds(76, 93, 134, 16);
-				users.add(addName);
-				addName.setColumns(10);
-				
-				JLabel lbladdName = new JLabel("Name");
-				lbladdName.setLabelFor(addName);
-				lbladdName.setBounds(16, 93, 61, 16);
-				users.add(lbladdName);
-				
-				JLabel lbladdPin = new JLabel("PIN");
-				lbladdPin.setBounds(260, 93, 61, 16);
-				users.add(lbladdPin);
-				
-				addPin = new JTextField();
-				lbladdPin.setLabelFor(addPin);
-				addPin.setColumns(10);
-				addPin.setBounds(300, 93, 134, 16);
-				users.add(addPin);
-				
-				JLabel lblEditAUser = new JLabel("Edit a User:");
-				lblEditAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				lblEditAUser.setBounds(6, 159, 91, 16);
-				users.add(lblEditAUser);
-				
-				JLabel lbleditName = new JLabel("Name");
-				lbleditName.setBounds(16, 187, 61, 16);
-				users.add(lbleditName);
-				
-				editName = new JTextField();
-				lbleditName.setLabelFor(editName);
-				editName.setColumns(10);
-				editName.setBounds(76, 187, 134, 16);
-				users.add(editName);
-				
-				JLabel lbleditPin = new JLabel("PIN");
-				lbleditPin.setBounds(260, 187, 61, 16);
-				users.add(lbleditPin);
-				
-				editPin = new JTextField();
-				lbleditPin.setLabelFor(editPin);
-				editPin.setColumns(10);
-				editPin.setBounds(300, 187, 134, 16);
-				users.add(editPin);
-				
-				JLabel lblDeleteAUser = new JLabel("Delete a User:");
-				lblDeleteAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				lblDeleteAUser.setBounds(6, 260, 117, 16);
-				users.add(lblDeleteAUser);
-				
-				JLabel lbldeletePin = new JLabel("PIN");
-				lbldeletePin.setBounds(16, 288, 61, 16);
-				users.add(lbldeletePin);
-				
-				deletePin = new JTextField();
-				lbldeletePin.setLabelFor(deletePin);
-				deletePin.setColumns(10);
-				deletePin.setBounds(76, 288, 134, 16);
-				users.add(deletePin);
-				
-				JButton btnApplydel = new JButton("Apply Delete");
-				btnApplydel.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						String pin1 = deletePin.getText();
-						BufferedReader br;
-						
-						if(pin1.length()!=4){
-				            JOptionPane.showMessageDialog(null, "Enter correct length PIN", "PIN is not length 4", JOptionPane.ERROR_MESSAGE);
-				        }
-						
-						try{
-							
-							
-							File users = new File("Users");
-							File tempFile = new File(users.getAbsolutePath() + ".tmp");
-							br = new BufferedReader(new FileReader("Users"));
-							PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-							String line = null;
-							
-				
-							if(pin1.equals(pinString)){
-								JOptionPane.showMessageDialog(null, "You cannot delete your current account", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
-								
-							}else{
-						
-						while((line = br.readLine()) !=null){
-							
-		                      if( !line.trim().startsWith(pin1)){
-		                    	  
-		                    	  pw.println(line);
-		                    	  pw.flush();
-		                    	 
-		                      } 
-			                    
-		                    }
-		                    pw.close();
-		                    br.close();
-		                   
-		                
-						if(!users.delete()){
-							System.out.println("could not delete file");
-							return;
-						}
-						if(!tempFile.renameTo(users)){
-							System.out.println("Could not rename file");
-						}
-							}
-						}catch(FileNotFoundException e2) {
-			                System.out.println("File not found.");
-						}catch(IOException k){
-			                System.out.println("IO Exception.");            
-						}
-						deletePin.setText("");
-					}
-					
-				
-					
-	});
-				btnApplydel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-				btnApplydel.setBounds(470, 280, 160, 29);
-				users.add(btnApplydel);
-				
-				JButton btnApplyedit = new JButton("Apply Edit");
-				btnApplyedit.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						BufferedReader br;
-						String pin2 = editPin.getText();
-						String pin3 = editName.getText();
-						if(pin2.length()!=4 || "".equals(pin3)){
-				            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
-				        }
+	 public void Users(){
 			
-						else{
-						try{
+			JLabel name = new JLabel("");
+			name.setBounds(321, 11, 61, 16);
+				 
+				JTextField addName;
+				JTextField addPin;
+				JTextField editName;
+				JTextField editPin;
+				JTextField deleteName;
+				JTextField deletePin;
+				 
+				 JPanel users = new JPanel();
+				 users.addComponentListener(new ComponentAdapter() {
+						@Override
+						public void componentShown(ComponentEvent e) {
+							users.add(name);
+							name.setText(nameString);
+						}
+					});
+				 panel.add(users, "users");
+				 users.setBackground(Color.WHITE);
+				 users.setBorder(new EmptyBorder(5, 5, 5, 5));
+				 users.setLayout(null);
+					
+					JButton btnSignOut = new JButton("Sign Out");
+					btnSignOut.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							card.show(panel, "login");
+						}
+					});
+					btnSignOut.setBounds(6, 6, 117, 29);
+					users.add(btnSignOut);
+					
+					JButton btnOrderScreen = new JButton("Order Screen");
+					btnOrderScreen.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							card.show(panel, "order");
+						}
+					});
+					btnOrderScreen.setBounds(577, 6, 117, 29);
+					users.add(btnOrderScreen);
+					
+					JLabel lblAddAUser = new JLabel("Add a User:");
+					lblAddAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+					lblAddAUser.setBounds(6, 65, 91, 16);
+					users.add(lblAddAUser);
+					
+					addName = new JTextField();
+					addName.setBounds(76, 93, 134, 16);
+					users.add(addName);
+					addName.setColumns(10);
+					
+					JLabel lbladdName = new JLabel("Name");
+					lbladdName.setLabelFor(addName);
+					lbladdName.setBounds(16, 93, 61, 16);
+					users.add(lbladdName);
+					
+					JLabel lbladdPin = new JLabel("PIN");
+					lbladdPin.setBounds(260, 93, 61, 16);
+					users.add(lbladdPin);
+					
+					addPin = new JTextField();
+					lbladdPin.setLabelFor(addPin);
+					addPin.setColumns(10);
+					addPin.setBounds(300, 93, 134, 16);
+					users.add(addPin);
+					
+					JLabel lblEditAUser = new JLabel("Edit a User:");
+					lblEditAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+					lblEditAUser.setBounds(6, 159, 91, 16);
+					users.add(lblEditAUser);
+					
+					JLabel lbleditName = new JLabel("Name");
+					lbleditName.setBounds(16, 187, 61, 16);
+					users.add(lbleditName);
+					
+					editName = new JTextField();
+					lbleditName.setLabelFor(editName);
+					editName.setColumns(10);
+					editName.setBounds(76, 187, 134, 16);
+					users.add(editName);
+					
+					JLabel lbleditPin = new JLabel("PIN");
+					lbleditPin.setBounds(260, 187, 61, 16);
+					users.add(lbleditPin);
+					
+					editPin = new JTextField();
+					lbleditPin.setLabelFor(editPin);
+					editPin.setColumns(10);
+					editPin.setBounds(300, 187, 134, 16);
+					users.add(editPin);
+					
+					JLabel lblDeleteAUser = new JLabel("Delete a User:");
+					lblDeleteAUser.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+					lblDeleteAUser.setBounds(6, 260, 117, 16);
+					users.add(lblDeleteAUser);
+					
+					JLabel lbldeletePin = new JLabel("PIN");
+					lbldeletePin.setBounds(16, 288, 61, 16);
+					users.add(lbldeletePin);
+					
+					deletePin = new JTextField();
+					lbldeletePin.setLabelFor(deletePin);
+					deletePin.setColumns(10);
+					deletePin.setBounds(76, 288, 134, 16);
+					users.add(deletePin);
+					
+					JButton btnApplydel = new JButton("Apply Delete");
+					btnApplydel.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
 							
-							File edit1 = new File("Users");
-							File tempFile = new File(edit1.getAbsolutePath() + ".tmp");
-							br = new BufferedReader(new FileReader("Users"));
-							PrintWriter pw = new PrintWriter(new FileWriter(tempFile));			
-							String line = null;
+							String pin1 = deletePin.getText();
+							BufferedReader br;
 							
-			                
-						while((line = br.readLine()) !=null){
-				
-							String[] editUser = line.split(",");
-										                    
-			                    if(pin2.equals(editUser[0]) || pin3.equals(editUser[1])){
-			                
-			                    	pw.println(pin2 + "," + pin3);
-			                    	pw.flush();
-			                    }else{
-			                    	pw.println(editUser[0] + "," + editUser[1]);
+							if(pin1.length()!=4){
+					            JOptionPane.showMessageDialog(null, "Enter correct length PIN", "PIN is not length 4", JOptionPane.ERROR_MESSAGE);
+					        }
+							
+							try{
+								
+								
+								File users = new File("Users");
+								File tempFile = new File(users.getAbsolutePath() + ".tmp");
+								br = new BufferedReader(new FileReader("Users"));
+								PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+								String line = null;
+								
+					
+								if(pin1.equals(pinString)){
+									JOptionPane.showMessageDialog(null, "You cannot delete your current account", "Cannot Delete", JOptionPane.ERROR_MESSAGE);
+									
+								}else{
+							
+							while((line = br.readLine()) !=null){
+								
+			                      if( !line.trim().startsWith(pin1)){
+			                    	  
+			                    	  pw.println(line);
+			                    	  pw.flush();
+			                    	 
+			                      } 
+				                    
 			                    }
-			                }
-		                    
-		                    pw.close();
-		                    br.close();
-		                   
-						if(!tempFile.renameTo(edit1)){
-							System.out.println("Could not rename file");
-						}
-					
-						}catch(FileNotFoundException e2) {
-			                System.out.println("File not found.");
-						}catch(IOException k){
-			                System.out.println("IO Exception.");            
-						}
-					}
-						editPin.setText("");
-						editName.setText("");
-					}
-
-				});
-				btnApplyedit.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-				btnApplyedit.setBounds(470, 181, 160, 29);
-				users.add(btnApplyedit);
-				
-				JButton btnApplyAdd = new JButton("Apply Changes");
-				btnApplyAdd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent event) {
-						String pinI = addPin.getText();
-						String nameI = addName.getText();
-						if(pinI.length()!=4){
-				            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
-				        }else if("".equals(pinI)){
-				            JOptionPane.showMessageDialog(null, "PIN is empty", "Add PIN", JOptionPane.ERROR_MESSAGE);
-				        }else if("".equals(nameI)){
-				        	JOptionPane.showMessageDialog(null, "No name was entered", "Add name", JOptionPane.ERROR_MESSAGE);
-				        	
-				        }else{
-						BufferedReader br;
-						try{
-							br = new BufferedReader(new FileReader("Users"));
-							String line = br.readLine();
-			                boolean flag = false;
+			                    pw.close();
+			                    br.close();
+			                   
 			                
-						FileWriter writer = new FileWriter("Users", true);
-						BufferedWriter bufferedWriter = new BufferedWriter(writer);
+							if(!users.delete()){
+								System.out.println("could not delete file");
+								return;
+							}
+							if(!tempFile.renameTo(users)){
+								System.out.println("Could not rename file");
+							}
+								}
+							}catch(FileNotFoundException e2) {
+				                System.out.println("File not found.");
+							}catch(IOException k){
+				                System.out.println("IO Exception.");            
+							}
+							deletePin.setText("");
+						}
 						
-						
-						
-						
-						while(line!=null){
-		                    String[] user = line.split(",");
-		                    if(pinI.equals(user[0])){
-		                        flag = true;
-		                    }
-		                    line=br.readLine();
-		                }
-		                if(!flag){
-		                	bufferedWriter.newLine();
-		                	bufferedWriter.write(addPin.getText() +"," + addName.getText());
-		                	JOptionPane.showMessageDialog(null, "User Added", "User Added", JOptionPane.PLAIN_MESSAGE);
-		                }else{
-		                    
-		                    JOptionPane.showMessageDialog(null, "PIN Already Exists", "PIN Already Exists", JOptionPane.ERROR_MESSAGE);
-		                }
-
-						
-						bufferedWriter.close();
-						}catch(FileNotFoundException e) {
-			                System.out.println("File not found.");
-						}catch(IOException k){
-			                System.out.println("IO Exception.");            
-			            }
-					}
-						addName.setText("");
-						addPin.setText("");
-					}	
 					
-				});
-				btnApplyAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-				btnApplyAdd.setBounds(470, 87, 160, 29);
-				users.add(btnApplyAdd);
-		 }
+						
+		});
+					btnApplydel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+					btnApplydel.setBounds(470, 280, 160, 29);
+					users.add(btnApplydel);
+					
+					JButton btnApplyedit = new JButton("Apply Edit");
+					btnApplyedit.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							BufferedReader br;
+							String pin2 = editPin.getText();
+							String pin3 = editName.getText();
+							if(pin2.length()!=4 || "".equals(pin3)){
+					            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
+					        }
+				
+							else{
+							try{
+								
+								File edit1 = new File("Users");
+								File tempFile = new File(edit1.getAbsolutePath() + ".tmp");
+								br = new BufferedReader(new FileReader("Users"));
+								PrintWriter pw = new PrintWriter(new FileWriter(tempFile));			
+								String line = null;
+								
+				                
+							while((line = br.readLine()) !=null){
+					
+								String[] editUser = line.split(",");
+											                    
+				                    if(pin2.equals(editUser[0]) || pin3.equals(editUser[1])){
+				                
+				                    	pw.println(pin2 + "," + pin3);
+				                    	pw.flush();
+				                    }else{
+				                    	pw.println(editUser[0] + "," + editUser[1]);
+				                    }
+				                }
+			                    
+			                    pw.close();
+			                    br.close();
+			                   
+							if(!tempFile.renameTo(edit1)){
+								System.out.println("Could not rename file");
+							}
+						
+							}catch(FileNotFoundException e2) {
+				                System.out.println("File not found." + e2);
+							}catch(IOException k){
+				                System.out.println("IO Exception." + k);            
+							}
+						}
+							editPin.setText("");
+							editName.setText("");
+						}
+
+					});
+					btnApplyedit.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+					btnApplyedit.setBounds(470, 181, 160, 29);
+					users.add(btnApplyedit);
+					
+					JButton btnApplyAdd = new JButton("Apply Changes");
+					btnApplyAdd.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent event) {
+							String pinI = addPin.getText();
+							String nameI = addName.getText();
+							if(pinI.length()!=4){
+					            JOptionPane.showMessageDialog(null, "PIN is not length 4", "Enter correct length PIN", JOptionPane.ERROR_MESSAGE);
+					        }else if("".equals(pinI)){
+					            JOptionPane.showMessageDialog(null, "PIN is empty", "Add PIN", JOptionPane.ERROR_MESSAGE);
+					        }else if("".equals(nameI)){
+					        	JOptionPane.showMessageDialog(null, "No name was entered", "Add name", JOptionPane.ERROR_MESSAGE);
+					        	
+					        }else{
+							BufferedReader br;
+							try{
+								br = new BufferedReader(new FileReader("Users"));
+								String line = br.readLine();
+				                boolean flag = false;
+				                
+							FileWriter writer = new FileWriter("Users", true);
+							BufferedWriter bufferedWriter = new BufferedWriter(writer);
+							
+							
+							
+							
+							while(line!=null){
+			                    String[] user = line.split(",");
+			                    if(pinI.equals(user[0])){
+			                        flag = true;
+			                    }
+			                    line=br.readLine();
+			                }
+			                if(!flag){
+			                	bufferedWriter.newLine();
+			                	bufferedWriter.write(addPin.getText() +"," + addName.getText());
+			                	JOptionPane.showMessageDialog(null, "User Added", "User Added", JOptionPane.PLAIN_MESSAGE);
+			                }else{
+			                    
+			                    JOptionPane.showMessageDialog(null, "PIN Already Exists", "PIN Already Exists", JOptionPane.ERROR_MESSAGE);
+			                }
+
+							
+							bufferedWriter.close();
+							}catch(FileNotFoundException e) {
+				                System.out.println("File not found." + e);
+							}catch(IOException k){
+				                System.out.println("IO Exception." + k);            
+				            }
+						}
+							addName.setText("");
+							addPin.setText("");
+						}	
+						
+					});
+					btnApplyAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+					btnApplyAdd.setBounds(470, 87, 160, 29);
+					users.add(btnApplyAdd);
+			 }
 	 
 	public void Prices(){
 		  JPanel contentPane;
@@ -1307,9 +1310,9 @@ JButton btnApplyChanges = new JButton("Apply Changes");
 						}
 						
 						}catch(FileNotFoundException e2) {
-			                System.out.println("File not found.");
+			                System.out.println("File not found." + e2);
 						}catch(IOException k){
-			                System.out.println("IO Exception.");            
+			                System.out.println("IO Exception." + k);            
 						}
 					}
 				
@@ -1321,7 +1324,7 @@ JButton btnApplyChanges = new JButton("Apply Changes");
 			
 			//autofill with default prices
 			BufferedReader br;
-			try {
+			try {		
 				br = new BufferedReader(new FileReader("Prices"));
 			
 	        String line = br.readLine();

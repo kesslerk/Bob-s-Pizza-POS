@@ -983,13 +983,25 @@ public class Screens extends JFrame {
 									
 								}else{
 							
+							int lineNum=0;
+									BufferedReader br2 = new BufferedReader(new FileReader("Users"));
+									String line2;
+									while((line2 = br2.readLine()) !=null){
+										lineNum++;
+									}
+									br2.close();
+							
+									int counter = 0;
 							while((line = br.readLine()) !=null){
-								
+								counter++;
 			                      if( !line.trim().startsWith(pin1)){
-			                    	  
-			                    	  pw.println(line);
+			                    	  if(counter!=lineNum){
+			                    		  pw.println(line);
+			                    	  }else{
+			                    		  pw.print(line);
+			                    	  }
 			                    	  pw.flush();
-			                    	  
+			                    	 
 			                      } 
 				                    
 			                    } JOptionPane.showMessageDialog(null, "User Deleted", "User Deleted", JOptionPane.PLAIN_MESSAGE);
@@ -1044,14 +1056,28 @@ public class Screens extends JFrame {
 								PrintWriter pw = new PrintWriter(new FileWriter(tempFile));			
 								String line = null;
 								
+				                int lineNum=0;
+								BufferedReader br2 = new BufferedReader(new FileReader("Users"));
+								String line2;
+								while((line2 = br2.readLine()) !=null){
+									lineNum++;
+								}
+								br2.close();
+						
+								int counter = 0;
+								
+								
 				                
 							while((line = br.readLine()) !=null){
-					
+								counter++;
 								String[] editUser = line.split(",");
 											                    
 				                    if(pin2.equals(editUser[0]) || pin3.equals(editUser[1])){
-				                
-				                    	pw.println(pin2 + "," + pin3);
+				                    	if(counter!=lineNum){
+				                    		pw.println(pin2 + "," + pin3);
+				                    	}else{
+				                    		pw.print(pin2 + "," + pin3);
+				                    	}
 				                    	pw.flush();
 				                    	
 				                    }else{
